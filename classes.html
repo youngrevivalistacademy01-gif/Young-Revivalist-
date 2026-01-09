@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YRA | Class Vault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="academy.css">
+</head>
+<body>
+
+    <div class="header">
+        <p>Academy Pathways</p>
+        <h1>Growth Progression</h1>
+    </div>
+
+    <div class="class-grid">
+        <a href="foundational-schedule.html" class="class-card">
+            <div class="icon-box"><i class="fa-solid fa-seedling"></i></div>
+            <div class="class-info">
+                <h3>Foundational Class</h3>
+            </div>
+            <div class="lock-status"><i class="fa-solid fa-unlock"></i></div>
+        </a>
+
+        <div class="class-card locked" onclick="initVault('IDENTITY CLASS', '300500', 'identity-schedule.html')">
+            <div class="icon-box"><i class="fa-solid fa-id-card"></i></div>
+            <div class="class-info">
+                <h3>Identity Class</h3>
+            </div>
+            <div class="lock-status"><i class="fa-solid fa-lock"></i></div>
+        </div>
+
+        <div class="class-card locked" onclick="initVault('MATURITY CLASS', '600301', 'maturity-schedule.html')">
+            <div class="icon-box"><i class="fa-solid fa-id-card"></i></div>
+            <div class="class-info">
+                <h3>Maturity Class</h3>
+            </div>
+            <div class="lock-status"><i class="fa-solid fa-lock"></i></div>
+        </div>
+
+        <div class="class-card locked" onclick="initVault('AMBASSADORS CLASS', '700500', 'ambassadors-schedule.html')">
+            <div class="icon-box"><i class="fa-solid fa-crown"></i></div>
+            <div class="class-info">
+                <h3>Ambassadors class</h3>
+            </div>
+            <div class="lock-status"><i class="fa-solid fa-lock"></i></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="vaultModal">
+        <div class="modal-content">
+            <h2 id="modalTitle" style="font-size: 1.1rem; text-transform: uppercase;"></h2>
+            <p style="font-size: 0.8rem; color: #888;">Enter authorized passkey to proceed</p>
+            
+            <input type="tel" id="keyField" placeholder="••••••" maxlength="6">
+            
+            <button class="btn-verify" onclick="validateKey()">Unlock Pathway</button>
+            <p id="errorNote" style="color: #ff5454; font-size: 0.75rem; margin-top: 15px; display: none; font-weight: 700;">
+                <i class="fa-solid fa-circle-exclamation"></i> Incorrect Passkey
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentPasskey = "";
+        let targetDestination = "";
+
+        const modal = document.getElementById('vaultModal');
+        const keyInput = document.getElementById('keyField');
+        const errorNote = document.getElementById('errorNote');
+
+        function initVault(name, key, url) {
+            currentPasskey = key;
+            targetDestination = url;
+            document.getElementById('modalTitle').innerText = name;
+            errorNote.style.display = 'none';
+            keyInput.value = "";
+            modal.style.display = 'flex';
+            keyInput.focus();
+        }
+
+        function validateKey() {
+            if (keyInput.value === currentPasskey) {
+                window.location.href = targetDestination;
+            } else {
+                errorNote.style.display = 'block';
+                keyInput.style.borderColor = '#ff5454';
+                setTimeout(() => {
+                    keyInput.style.borderColor = '#F0F0F0';
+                }, 500);
+            }
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
+    </script>
+</body>
+</html>

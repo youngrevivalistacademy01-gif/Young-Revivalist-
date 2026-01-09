@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Identity of God Quiz | YRA</title>
+    <link rel="stylesheet" href="ID-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="quiz-portal.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary);">0/10</h1>
+                <p>Knowledge of the Holy is Understanding.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Identity of God Quiz Result">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/quiz-portal.html">
+                
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "According to Christian theism, who is God?", a: ["One powerful being among many", "A force within the universe", "The ultimate, infinite Creator and Sustainer of all things", "A human idea formed by religion"], c: 2 },
+            { q: "The name “I AM” in Exodus 3:14 primarily teaches that God is:", a: ["Created before the universe", "Dependent on creation", "Self-existent and eternal", "Limited by time"], c: 2 },
+            { q: "God’s omnipresence means that He:", a: ["Exists only in heaven", "Is present everywhere yet distinct from creation", "Is identical with the universe", "Moves from place to place"], c: 1 },
+            { q: "God’s omniscience includes:", a: ["Knowledge of only the past", "Knowledge gained over time", "Knowledge of all things—past, present, future, and possible", "Knowledge limited to spiritual matters"], c: 2 },
+            { q: "The cosmological (First Cause) argument teaches that:", a: ["The universe is eternal", "Everything exists by chance", "The universe must have a timeless First Cause", "Matter created itself"], c: 2 },
+            { q: "The fine-tuning of the universe points to:", a: ["Random natural processes", "Human intelligence", "Intentional design by an intelligent Creator", "Scientific ignorance"], c: 2 },
+            { q: "The moral law argument concludes that:", a: ["Morality is culturally created", "Moral values require a Moral Lawgiver", "Humans naturally invent right and wrong", "Conscience is unreliable"], c: 1 },
+            { q: "According to Romans 2:14–15, human conscience shows that:", a: ["Morality is learned from society", "The Law is unnecessary", "God’s law is written on the human heart", "Only believers have moral awareness"], c: 2 },
+            { q: "Creation ex nihilo means that:", a: ["God shaped the world from existing matter", "The universe created itself", "God created everything out of nothing", "Matter has always existed"], c: 2 },
+            { q: "According to 2 Corinthians 5:17, personal experience supports God’s existence because:", a: ["Religion controls behavior", "Faith produces emotional comfort", "Life in Christ results in real inner transformation", "Change comes from self-discipline"], c: 2 }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(idx === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns[correct].classList.add('correct-flash');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

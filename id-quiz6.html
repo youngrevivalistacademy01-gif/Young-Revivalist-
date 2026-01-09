@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kingdom Culture Quiz | YRA</title>
+    <link rel="stylesheet" href="ID-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="quiz-portal.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <i class="fa-solid fa-earth-africa" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <span class="badge">Assessment Complete</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary); margin: 10px 0;">0/10</h1>
+                <p>Thy Kingdom come, Thy will be done on earth.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Kingdom Culture Quiz Result">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/quiz-portal.html">
+                
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "Culture can best be described as:", a: ["Laws and regulations of a nation", "A political system with a king or queen", "The learned way of life of a population, including beliefs, arts, and habits", "The economic activities of a society"], c: "The learned way of life of a population, including beliefs, arts, and habits" },
+            { q: "The Hebrew word “Malkuth” and the Greek word “Basileia” primarily refer to:", a: ["A reign, dominion, or rule", "Human kingdoms", "Cultural habits", "Moral laws"], c: "A reign, dominion, or rule" },
+            { q: "Which of the following best describes the Kingdom of Darkness?", a: ["A spiritual domain where Satan holds authority by permission of humans", "A realm where God rules through the Spirit", "A political nation on earth", "Heaven’s dwelling place"], c: "A spiritual domain where Satan holds authority by permission of humans" },
+            { q: "The Kingdom of God is:", a: ["A political system run by elected leaders", "A cultural movement among nations", "A temporary earthly kingdom", "The rule of God over hearts and lives of those who submit to Him"], c: "The rule of God over hearts and lives of those who submit to Him" },
+            { q: "The Kingdom of Heaven refers to:", a: ["The natural world", "God’s throne and dwelling place in the spiritual realm", "The rule of earthly kings", "The same as the Kingdom of God in every context"], c: "God’s throne and dwelling place in the spiritual realm" },
+            { q: "Which of the following is NOT a key aspect of kingdom culture?", a: ["Loyalty", "Financial wealth", "Punctuality", "Dependability"], c: "Financial wealth" },
+            { q: "Dependability in kingdom culture is reflected by:", a: ["Doing what you say you will do and being trustworthy", "Always being early", "Avoiding all responsibilities", "Seeking recognition for work"], c: "Doing what you say you will do and being trustworthy" },
+            { q: "The first stage of disloyalty in a group is:", a: ["Development of an independent spirit", "Public rebellion", "Disobedience due to offense", "Open criticism of leadership"], c: "Development of an independent spirit" },
+            { q: "According to Romans 12:2, transformation in kingdom culture is achieved by:", a: ["Following the patterns of the world", "Accumulating knowledge without application", "Renewing the mind and engaging with scripture", "Being politically powerful"], c: "Renewing the mind and engaging with scripture" },
+            { q: "Loyalty in kingdom culture is described as:", a: ["Emotional attachment only", "Blind obedience without understanding", "Faithfulness and commitment both to those above and below", "Preference for personal gain"], c: "Faithfulness and commitment both to those above and below" }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            const shuffledOptions = shuffle([...quiz.a]);
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, quiz.c, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct, btn) {
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(selected === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns.forEach(b => {
+                    if(b.innerText === correct) b.classList.add('correct-flash');
+                });
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

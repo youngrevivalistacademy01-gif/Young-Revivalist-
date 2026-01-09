@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Authority of the Believer Quiz | YRA</title>
+    <link rel="stylesheet" href="ID-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="quiz-portal.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <i class="fa-solid fa-shield-halved" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <span class="badge">Assessment Complete</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary); margin: 10px 0;">0/10</h1>
+                <p>Behold, I give unto you power to tread on serpents and scorpions.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Believer Authority Quiz Result">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/quiz-portal.html">
+                
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "The Greek word “Exousia” means:", a: ["Physical strength", "Delegated power or right to act on behalf of another", "Miraculous abilities only", "Influence over others without authority"], c: "Delegated power or right to act on behalf of another" },
+            { q: "Jesus gave His disciples authority over:", a: ["Only sickness", "Demons and all power of the enemy", "Earthly governments", "Religious rituals"], c: "Demons and all power of the enemy" },
+            { q: "Authority in the Kingdom is primarily about:", a: ["Political dominance", "Spiritual positioning and delegated power in Christ", "Physical strength", "Popularity among peers"], c: "Spiritual positioning and delegated power in Christ" },
+            { q: "One major dimension of a believer’s authority is:", a: ["Authority over Satan and principalities", "Authority to collect wealth", "Authority to dictate culture", "Authority to dominate peers"], c: "Authority over Satan and principalities" },
+            { q: "Authority to control circumstances includes:", a: ["Speaking to mountains and seeing them removed", "Always getting one’s own way", "Exercising power over others physically", "Avoiding all challenges"], c: "Speaking to mountains and seeing them removed" },
+            { q: "Exercising authority over life and death means:", a: ["Having control over everyone’s lifespan", "Assurance of eternal life and mastery over premature death", "Predicting future events", "Avoiding natural consequences completely"], c: "Assurance of eternal life and mastery over premature death" },
+            { q: "Exemption rights in Christ include all of the following EXCEPT:", a: ["Exempted from fear", "Exempted from untimely death", "Exempted from daily responsibilities", "Exempted from dominion of darkness"], c: "Exempted from daily responsibilities" },
+            { q: "To exercise authority over the devil, believers should:", a: ["Wait for God to act alone", "Actively resist and cast him out wherever he operates", "Avoid conflict", "Focus only on personal desires"], c: "Actively resist and cast him out wherever he operates" },
+            { q: "One way to stay in authority is:", a: ["Rely solely on natural talent", "Stay spiritually alert and walk in holiness", "Avoid reading the Word of God", "Ignore prayer and intercession"], c: "Stay spiritually alert and walk in holiness" },
+            { q: "The authority to preach with signs involves:", a: ["Speaking words only", "Demonstrating the Gospel’s power through miracles and boldness", "Avoiding acts of faith", "Focusing on ceremonial rituals alone"], c: "Demonstrating the Gospel’s power through miracles and boldness" }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            const shuffledOptions = shuffle([...quiz.a]);
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, quiz.c, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct, btn) {
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(selected === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns.forEach(b => {
+                    if(b.innerText === correct) b.classList.add('correct-flash');
+                });
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

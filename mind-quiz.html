@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Renewing the Mind Quiz | YRA</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Black Theme Overrides */
+        body.portal-body { background-color: #000000; color: #ffffff; }
+        .sanctuary-header { background: rgba(0,0,0,0.9); border-bottom: 1px solid #1a1a1a; }
+        .nav-brand { color: #ffffff; }
+        .back-link { color: #888; }
+        #quiz-box { background: #0a0a0a; border: 1px solid #1a1a1a; }
+        .quiz-row { background: #111111; border: 1px solid #222; color: #ffffff; }
+        .quiz-row:hover { border-color: var(--primary); background: #161616; }
+        #passkey-input { background: #000000; border: 1px solid #333; color: #ffffff; }
+        .portal-intro h1 { color: #ffffff; }
+        .portal-intro p { color: #888; }
+        
+        /* Feedback Colors for Dark Mode */
+        .correct-flash { border-color: #2e7d32 !important; background: rgba(46, 125, 50, 0.2) !important; color: #81c784 !important; }
+        .wrong-flash { border-color: #c62828 !important; background: rgba(198, 40, 40, 0.2) !important; color: #e57373 !important; }
+    </style>
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro" style="text-align: left; margin-bottom: 20px;">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.4rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary);">0/10</h1>
+                <p>Be transformed by the renewing of your mind.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Mind Renewal Quiz Result">
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "The need for mind renewal despite being a 'new creature' is primarily because:", a: ["Salvation only changes emotions", "Only the spirit is regenerated; the soul retains patterns", "The body becomes perfect instantly", "Believers have no responsibility"], c: 1 },
+            { q: "Romans 12:2 emphasizes transformation through renewal because:", a: ["Outward change is unnecessary", "Transformation must start internally and manifest externally", "Christians must conform to social morality", "Inner change is only symbolic"], c: 1 },
+            { q: "The soul is identified as the seat of:", a: ["Physical appearance", "Mind, will, and emotions", "Eternal judgment", "Heavenly identity only"], c: 1 },
+            { q: "A Christian may still struggle with addictions after salvation because:", a: ["Salvation is incomplete", "The Holy Spirit is weak", "Living by old thought patterns and conditioning", "Sin has more power than grace"], c: 2 },
+            { q: "The formation of negative mindsets is largely the result of:", a: ["Genetic inheritance alone", "Environmental, emotional, and informational influences", "Lack of prayer alone", "Absence of church attendance"], c: 1 },
+            { q: "Renewing the mind involves:", a: ["Attempting to erase memories", "Replacing ungodly patterns with God's Word", "Depending on emotional worship", "Waiting for supernatural habit changes"], c: 1 },
+            { q: "The believer’s responsibility in mind renewal indicates that:", a: ["Maturity happens automatically", "Deliverance requires active participation and discipline", "God forces transformation", "Prayer alone guarantees change"], c: 1 },
+            { q: "According to 2 Corinthians 10:4–5, strongholds are primarily:", a: ["Demonic altars in villages", "Mental belief systems and arguments resisting truth", "Physical manifestations of sickness", "Spiritual warfare night attacks"], c: 1 },
+            { q: "The process of 'taking thoughts captive' means:", a: ["Ignoring emotional reactions", "Letting thoughts flow without evaluation", "Aligning thoughts with Scripture before accepting them", "Suppressing thoughts without emotion"], c: 2 },
+            { q: "The declaration 'You possess what you confess' emphasizes that:", a: ["Speech reinforces mindset transformation", "Confessions only matter in church", "Silence is most effective", "Prayer is unnecessary with affirmations"], c: 0 }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(idx === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns[correct].classList.add('correct-flash');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

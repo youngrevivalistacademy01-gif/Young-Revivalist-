@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Assessment Center | YRA</title>
+    <link rel="stylesheet" href="academy.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <a href="dashboard.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+    </header>
+
+    <main class="portal-container">
+        <header class="portal-intro">
+            <span class="badge">The Quizzer Hall</span>
+            <h1>The <span>Gate</span> of Wisdom</h1>
+            <p>Select your assessment module. You must enter the unique 5-digit passkey provided by the Academy to unlock the questions.</p>
+        </header>
+
+        <div class="quiz-stack">
+            <div class="quiz-row" onclick="openGate('Gospel Class', '10001', 'gospel-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-book-bible"></i></div>
+                 <div><h3>Gospel Class</h3><p>Module 1-3</p></div>   
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Secret Place', '31005', 'secret-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
+                    <div><h3>Secret Place Quizzer</h3><p>Module 4</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Holy Spirit', '32100', 'spirit-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-dove"></i></div>
+                    <div><h3>Holy Spirit </h3><p>Module 5-6</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Renewing the Mind', '52335', 'mind-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+                    <div><h3>Renewing the Mind</h3><p>Module 7</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Understanding Purpose', '44423', 'purpose-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-compass"></i></div>
+                    <div><h3>Understanding Purpose</h3><p>Module 8</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Temperament', '11155', 'temp-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-mask"></i></div>
+                    <div><h3>Spirit Controlled Temperament</h3><p>Module 9</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Agape Quizzer', '88854', 'agape-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-heart"></i></div>
+                    <div><h3>Agape </h3><p>Module 10</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Saving Faith', '50001', 'faith-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div><h3>Saving Faith</h3><p>Module 11</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Blessing of Abraham', '60055', 'blessing-quiz.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-gem"></i></div>
+                    <div><h3>Blessing of Abraham</h3><p>Module 12</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('The Identity Of God', '80051', 'id-quiz1.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-sun"></i></div>
+                    <div><h3>The Identity Of God</h3><p>Identity Module 1-2</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('The Identity Of A Believer', '30011', 'id-quiz.2html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-user-check"></i></div>
+                    <div><h3>The Identity Of A Believer</h3><p>Identity Module 3</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Person of Jesus', '60001', 'id-quiz5.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-cross"></i></div>
+                    <div><h3>Person of Jesus</h3><p>Identity Module 4</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Intimacy with the Father', '05500', 'id-quiz3.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-hands-holding-child"></i></div>
+                    <div><h3>Intimacy with the Father</h3><p>Identity Module 5</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Understanding Righteousness', '82510', 'id-quiz4.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div><h3>Understanding Righteousness</h3><p>Identity Module 6</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('The Kingdom Culture', '40357', 'id-quiz6.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-landmark"></i></div>
+                    <div><h3>The Kingdom Culture</h3><p>Identity Module 7</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+
+            <div class="quiz-row" onclick="openGate('Authority of a Believer', '66544', 'id-quiz7.html')">
+                <div class="quiz-info">
+                    <div class="icon-box"><i class="fa-solid fa-key"></i></div>
+                    <div><h3>Authority of a Believer</h3><p>Identity Module 8</p></div>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </div>
+        </div>
+    </main>
+
+    <div id="gatekeeper" class="modal hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h2 id="target-quiz-name">Access Key</h2>
+            </div>
+            <div class="modal-body">
+                <p>Identify yourself with the 5-digit passkey.</p>
+                <input type="tel" id="passkey-input" maxlength="5" placeholder="0 0 0 0 0">
+                <div id="error-msg" class="error-msg hidden">Incorrect Key. Entry Denied.</div>
+                <button class="unlock-btn" onclick="verifyKey()">Unlock Assessment</button>
+                <button class="cancel-link" onclick="closeGate()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTarget = "";
+        let currentKey = "";
+
+        function openGate(name, key, url) {
+            currentTarget = url;
+            currentKey = key;
+            document.getElementById('target-quiz-name').innerText = name;
+            document.getElementById('gatekeeper').classList.remove('hidden');
+            document.getElementById('passkey-input').focus();
+        }
+
+        function closeGate() {
+            document.getElementById('gatekeeper').classList.add('hidden');
+            document.getElementById('passkey-input').value = "";
+            document.getElementById('error-msg').classList.add('hidden');
+        }
+
+        function verifyKey() {
+            const inputVal = document.getElementById('passkey-input').value;
+            if (inputVal === currentKey) {
+                window.location.href = currentTarget;
+            } else {
+                document.getElementById('error-msg').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

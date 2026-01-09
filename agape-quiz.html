@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Agape Quizzer | YRA</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* White Theme Overrides */
+        body.portal-body { background-color: #ffffff; color: #1a1a1a; }
+        .sanctuary-header { background: rgba(255,255,255,0.9); border-bottom: 1px solid #eee; }
+        .nav-brand { color: #1a1a1a; }
+        .back-link { color: #666; }
+        #quiz-box { background: #fcfcfc; border: 1px solid #f0f0f0; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .quiz-row { background: #ffffff; border: 1px solid #eee; color: #1a1a1a; text-decoration: none; display: block;}
+        .quiz-row:hover { border-color: var(--primary); background: #fffaf9; }
+        #passkey-input { background: #ffffff; border: 1px solid #ddd; color: #1a1a1a; }
+        .portal-intro h1 { color: #1a1a1a; }
+        .portal-intro p { color: #555; }
+        
+        /* Light Mode Feedback */
+        .correct-flash { border-color: #2e7d32 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+        .wrong-flash { border-color: #c62828 !important; background: #ffebee !important; color: #c62828 !important; }
+    </style>
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro" style="text-align: left; margin-bottom: 20px;">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary);">0/10</h1>
+                <p>Love never fails.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Agape Quiz Result">
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "According to 1 Corinthians 13:4–5, one major implication of the definition of love is that:", a: ["Man can naturally love given the right environment", "True love originates from discipline", "Man cannot truly love without God's nature influencing his heart", "Human love is always equal to God's love"], c: 2 },
+            { q: "Why must a man love God first before he can love his neighbor?", a: ["Loving God guarantees earthly success", "Love is first a spiritual impartation, not natural behavior", "Loving others requires emotional maturity", "Loving others requires mutual benefit"], c: 1 },
+            { q: "Which form of love is selfless, sacrificial, seeking the welfare of others without return?", a: ["Philia", "Agape", "Pragma", "Storge"], c: 1 },
+            { q: "Which type of love is characterized by passion and physical attraction (short-lived)?", a: ["Eros", "Ludus", "Mania", "Pragma"], c: 0 },
+            { q: "Which love language is verbal encouragement, appreciation, and kind words?", a: ["Acts of Service", "Words of Affirmation", "Quality Time", "Receiving Gifts"], c: 1 },
+            { q: "The concept of Brotherhood in 1 Cor 12:25–27 teaches that:", a: ["Christians must compete for importance", "Each member functions alone", "Believers are interconnected; one's suffering affects the whole", "Maturity means not depending on others"], c: 2 },
+            { q: "Which type of love can become destructive because it becomes possessive and manipulative?", a: ["Ludus", "Mania", "Pragma", "Philautia"], c: 1 },
+            { q: "When should sin be corrected publicly rather than privately?", a: ["When the sin is personal and minor", "When private correction fails the first time", "When the sin affects the Gospel or leads others astray", "When the person requests it"], c: 2 },
+            { q: "Why is forgiveness necessary for love to continue?", a: ["It proves who is stronger", "Love cannot coexist with bitterness", "It automatically restores trust", "It prevents future offense"], c: 1 },
+            { q: "In the ODF principle, what does 'Forget It' imply?", a: ["Ignore the offender", "Pretend it never occurred", "Release the emotional memory so bitterness doesn't linger", "Allow the offender to repeat it freely"], c: 2 }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(idx === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns[correct].classList.add('correct-flash');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

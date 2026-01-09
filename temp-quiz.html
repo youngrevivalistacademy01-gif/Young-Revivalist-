@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Temperament Quiz | YRA</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Black Theme Overrides */
+        body.portal-body { background-color: #000000; color: #ffffff; }
+        .sanctuary-header { background: rgba(0,0,0,0.9); border-bottom: 1px solid #1a1a1a; }
+        .nav-brand { color: #ffffff; }
+        .back-link { color: #888; }
+        #quiz-box { background: #0a0a0a; border: 1px solid #1a1a1a; }
+        .quiz-row { background: #111111; border: 1px solid #222; color: #ffffff; text-decoration: none; display: block;}
+        .quiz-row:hover { border-color: var(--primary); background: #161616; }
+        #passkey-input { background: #000000; border: 1px solid #333; color: #ffffff; }
+        .portal-intro h1 { color: #ffffff; }
+        .portal-intro p { color: #888; }
+        
+        /* Dark Mode Feedback */
+        .correct-flash { border-color: #2e7d32 !important; background: rgba(46, 125, 50, 0.2) !important; color: #81c784 !important; }
+        .wrong-flash { border-color: #c62828 !important; background: rgba(198, 40, 40, 0.2) !important; color: #e57373 !important; }
+    </style>
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro" style="text-align: left; margin-bottom: 20px;">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary);">0/10</h1>
+                <p>He who is spiritual judges all things.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Temperament Quiz Result">
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "Temperament is best defined as:", a: ["A learned behavioral pattern", "The inborn nature that consistently influences behavior", "A temporary emotional response", "A personality for social acceptance"], c: 1 },
+            { q: "Galatians 5:16 implies the key to overcoming temperamental weakness is:", a: ["Increasing human effort", "Avoiding emotional triggers", "Allowing the Holy Spirit to guide choices", "Suppressing emotions"], c: 2 },
+            { q: "A Spirit-Controlled Temperament primarily results when:", a: ["Memorizing scripture without application", "Forcing behavior changes externally", "The Holy Spirit influences temperament from within", "Changing environment and circles"], c: 2 },
+            { q: "Which principle teaches that 'people see others through the lens of their own experiences'?", a: ["The Elevator Principle", "The Lens and Mirror Principle", "The Loyalty Principle", "The Pain Principle"], c: 1 },
+            { q: "Which temperament is expressive, enthusiastic, and people-oriented, but avoids deep responsibility?", a: ["Melancholy", "Supine", "Sanguine", "Phlegmatic"], c: 2 },
+            { q: "The Choleric temperament is best characterized by:", a: ["Emotional sensitivity and creativity", "Calmness and diplomacy", "Vision, decisiveness, and strong leadership", "Dependence on approval"], c: 2 },
+            { q: "The weakness of the Melancholy temperament often appears in the form of:", a: ["Over-optimism and impulsiveness", "Moodiness and overthinking", "Passivity and avoidance", "Aggression"], c: 1 },
+            { q: "The Supine temperament is unique because it:", a: ["Is naturally dominant", "Seeks approval but struggles to communicate needs", "Is emotionally detached", "Thrives in solitude"], c: 1 },
+            { q: "Developing strengths from all temperaments requires:", a: ["Forcing change through willpower", "Identifying traits and applying Scripture intentionally", "Imitating strong personalities", "Trying to become like others"], c: 1 },
+            { q: "Ethics in temperament development refers to:", a: ["Appearing intelligent", "Public emotional discipline", "Expressing a life aligned with scripture", "Avoiding conflict at all cost"], c: 2 }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(idx === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns[correct].classList.add('correct-flash');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

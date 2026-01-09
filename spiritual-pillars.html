@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YRA | Spiritual Pillars</title>
+    <link rel="stylesheet" href="academy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+
+    <div class="pillars-wrapper">
+        <header class="pillars-nav">
+            <button class="tab-link active" onclick="switchTab(event, 'intercession')">Intercession</button>
+            <button class="tab-link" onclick="switchTab(event, 'intimacy')">Intimacy</button>
+            <button class="tab-link" onclick="switchTab(event, 'fellowship')">Fellowship</button>
+        </header>
+
+        <div id="intercession" class="tab-pane active">
+            <div class="pillar-hero intercession-bg">
+                <span class="pillar-badge gold">The Lifestyle of Priesthood</span>
+                <h1>Standing in the Gap</h1>
+                <p class="scripture-ref">"And I sought for a man among them..." — Ezekiel 22:30</p>
+            </div>
+            
+            <div class="pillar-content">
+                <p>At <strong>Young Revivalist Academy (YRA)</strong>, we uphold intercession as a core pillar. This conviction is deeply rooted in <strong>Rhemanized Nation</strong>, which believes in the ministry of standing in the gap for nations and generations.</p>
+                
+                <div class="feature-grid">
+                    <div class="feat-item"><i class="fa-solid fa-eye"></i> Discern spiritual burdens</div>
+                    <div class="feat-item"><i class="fa-solid fa-bullseye"></i> Targeted intercession</div>
+                    <div class="feat-item"><i class="fa-solid fa-wind"></i> Pray prophetically</div>
+                    <div class="feat-item"><i class="fa-solid fa-fire"></i> Birth revival</div>
+                </div>
+                
+                <p class="closing-call">Will you be the one God is searching for?</p>
+            </div>
+        </div>
+
+        <div id="intimacy" class="tab-pane">
+            <div class="pillar-hero intimacy-bg">
+                <span class="pillar-badge orange">The First Call</span>
+                <h1>Walking in Deep Fellowship</h1>
+                <p class="scripture-ref">"One thing have I desired of the Lord..." — Psalm 27:4</p>
+            </div>
+            
+            <div class="pillar-content">
+                <p>Intimacy with God is the bedrock of true revival. At YRA, we raise men and women who genuinely know God. Before you stand before men, you must learn to stay with God.</p>
+
+                <div class="quote-box">
+                    "Intimacy is not performance—it is pursuit. It is the intentional journey of becoming one with the Father."
+                </div>
+
+                <h3>Training Focus:</h3>
+                <ul class="pillar-list">
+                    <li><i class="fa-solid fa-door-closed"></i> Developing a secret place culture</li>
+                    <li><i class="fa-solid fa-scroll"></i> Practicing spiritual disciplines</li>
+                    <li><i class="fa-solid fa-comment-dots"></i> Understanding the language of communion</li>
+                    <li><i class="fa-solid fa-heart"></i> Growing in love, trust, and surrender</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="fellowship" class="tab-pane">
+            <div class="pillar-hero fellowship-bg">
+                <span class="pillar-badge teal">The Atmosphere of Transformation</span>
+                <h1>Alignment & Brotherhood</h1>
+                <p class="scripture-ref">"As iron sharpens iron..." — Proverbs 27:17</p>
+            </div>
+            
+            <div class="pillar-content">
+                <p>Fellowship is more than attendance—it is alignment. As our mother body, <strong>Rhemanized Nation</strong>, holds: <em>you become what you fellowship with.</em></p>
+
+                <div class="fellowship-types">
+                    <div class="type-card">
+                        <h4>Vertical</h4>
+                        <p>Fellowship with God through prayer, worship, and the Word.</p>
+                    </div>
+                    <div class="type-card">
+                        <h4>Horizontal</h4>
+                        <p>Fellowship with believers for strength and accountability.</p>
+                    </div>
+                    <div class="type-card">
+                        <h4>Systemic</h4>
+                        <p>Engaging world structures (Media, Culture) without compromise.</p>
+                    </div>
+                </div>
+
+                <div class="pillar-footer">
+                    To carry fire, you must stay connected to the altar.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(evt, tabId) {
+            let panes = document.getElementsByClassName("tab-pane");
+            for (let pane of panes) { pane.classList.remove("active"); }
+
+            let links = document.getElementsByClassName("tab-link");
+            for (let link of links) { link.classList.remove("active"); }
+
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

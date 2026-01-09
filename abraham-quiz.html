@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Blessing of Abraham Quiz | YRA</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* White Theme Overrides */
+        body.portal-body { background-color: #ffffff; color: #1a1a1a; }
+        .sanctuary-header { background: rgba(255,255,255,0.9); border-bottom: 1px solid #eee; }
+        .nav-brand { color: #1a1a1a; }
+        .back-link { color: #666; }
+        #quiz-box { background: #fcfcfc; border: 1px solid #f0f0f0; box-shadow: 0 10px 40px rgba(0,0,0,0.03); padding: 25px; border-radius: 24px; }
+        .quiz-row { background: #ffffff; border: 1px solid #eee; color: #1a1a1a; text-decoration: none; display: block; width: 100%; text-align: left; padding: 16px; margin-bottom: 10px; border-radius: 12px; cursor: pointer;}
+        .quiz-row:hover { border-color: var(--primary); background: #fffaf9; }
+        #passkey-input { background: #ffffff; border: 1px solid #ddd; color: #1a1a1a; padding: 15px; width: 100%; border-radius: 10px; }
+        .portal-intro h1 { color: #1a1a1a; }
+        
+        /* Light Mode Feedback */
+        .correct-flash { border-color: #2e7d32 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+        .wrong-flash { border-color: #c62828 !important; background: #ffebee !important; color: #c62828 !important; }
+    </style>
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container" style="max-width: 500px; margin: 30px auto; width: 92%;">
+        <section id="quiz-box">
+            <div class="portal-intro" style="text-align: left; margin-bottom: 20px;">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()" style="width: 100%; background: #FF7B54; border: none; padding: 18px; border-radius: 12px; color: white; font-weight: 800; margin-top: 10px; cursor: pointer;">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: #FF7B54;">0/10</h1>
+                <p>The Blessing of Abraham is yours through Christ.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Blessing of Abraham Quiz Result">
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required style="margin-bottom: 10px;">
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn" style="width: 100%; background: #FF7B54; border: none; padding: 18px; border-radius: 12px; color: white; font-weight: 800; margin-top: 20px; cursor: pointer;">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "What was the first thing God created into existence?", a: ["Man", "Light", "Earth", "Animals"], c: 1 },
+            { q: "The first living things God blessed were:", a: ["Man and Woman", "Trees and Plants", "Animals of the sea and birds", "The Earth"], c: 2 },
+            { q: "The word 'Blessing' means to be:", a: ["Rich and wealthy", "Whole and in a good condition", "Loved by God", "Given a lot of children"], c: 1 },
+            { q: "Why did God bless living things?", a: ["To give them food", "To give them shelter", "Their existence can be altered by words of men", "To make them beautiful"], c: 2 },
+            { q: "The Earth is considered a living thing because it has the ability to:", a: ["Walk and talk", "Sing and cry", "Multiply and reproduce", "Think and feel"], c: 2 },
+            { q: "Who was cursed by the Earth for killing his brother?", a: ["Adam", "Noah", "Ham", "Cain"], c: 3 },
+            { q: "The Bible says God created man through intercourse with:", a: ["Angels", "The Earth", "The sky", "The dust"], c: 1 },
+            { q: "Before the fall, woman was meant to give birth:", a: ["With great pain", "Without pain", "With help from doctors", "In the hospital"], c: 1 },
+            { q: "Who became the seed of Adam to carry the blessing after Abel's death?", a: ["Cain", "Seth", "Noah", "Ham"], c: 1 },
+            { q: "What was the sign of God's new covenant with Noah?", a: ["A dove", "An ark", "A rainbow", "A sacrifice"], c: 2 }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(idx === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns[correct].classList.add('correct-flash');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').style.display = 'none';
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

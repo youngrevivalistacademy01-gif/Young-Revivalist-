@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Person of Jesus Quiz | YRA</title>
+    <link rel="stylesheet" href="ID-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="quiz-portal.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary);">0/10</h1>
+                <p>He is the way, the truth, and the life.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Person of Jesus Quiz Result">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/quiz-portal.html">
+                
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "The term 'monogenes' as applied to Jesus primarily emphasizes that He:", a: ["Was the first created being", "Is God’s most favored prophet", "Shares the same essence and nature as the Father", "Was adopted as God’s Son at baptism"], c: "Shares the same essence and nature as the Father" },
+            { q: "According to Hebrews 1:3, Jesus is described as:", a: ["A reflection of divine wisdom", "A representative sent by God", "The radiance of God’s glory and exact representation of His being", "A messenger revealing moral truth"], c: "The radiance of God’s glory and exact representation of His being" },
+            { q: "Jesus’ eternal relationship with the Father in John 17:24 points to:", a: ["His obedience as a servant", "His pre-existence and divine nature", "His role as a teacher", "His humanity alone"], c: "His pre-existence and divine nature" },
+            { q: "Philippians 2:9–11 teaches that the exaltation of Jesus’ name results in:", a: ["Greater recognition among believers only", "Universal acknowledgment of His authority", "The replacement of God the Father", "The abolishment of worship"], c: "Universal acknowledgment of His authority" },
+            { q: "Jesus being seated at the right hand of the Father (Ephesians 1:20–21) signifies:", a: ["Rest after creation", "Equality with angels", "Supreme authority over all powers", "Temporary honor"], c: "Supreme authority over all powers" },
+            { q: "The name “Jesus” (Yeshua) directly communicates that:", a: ["God judges humanity", "Yahweh saves humanity from sin", "The Messiah brings political freedom", "God reveals hidden knowledge"], c: "Yahweh saves humanity from sin" },
+            { q: "Calling on the name of Jesus implies:", a: ["Merely speaking a sacred word", "Appealing to religious tradition", "Invoking the full authority and saving power of God", "Declaring personal faith only"], c: "Invoking the full authority and saving power of God" },
+            { q: "According to 2 Corinthians 5:21, Jesus’ bearing of sin resulted in:", a: ["Humanity becoming morally improved", "The law being abolished", "Believers becoming the righteousness of God in Him", "Sin being ignored"], c: "Believers becoming the righteousness of God in Him" },
+            { q: "Hebrews 2:14 teaches that Jesus’ death accomplished which victory?", a: ["The removal of human suffering", "The destruction of the devil’s power over death", "The end of temptation", "The judgment of the nations"], c: "The destruction of the devil’s power over death" },
+            { q: "Jesus as the “second Adam” (Romans 5:18–19) primarily means that He:", a: ["Reversed physical death for all humanity", "Replaced the Old Testament law", "Restored humanity to oneness with God through obedience", "Created a new moral system"], c: "Restored humanity to oneness with God through obedience" }
+        ];
+
+        let currentQ = 0; 
+        let score = 0;
+
+        // Shuffle function to randomize answer order
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            // Clone and shuffle the options for this question
+            const shuffledOptions = shuffle([...quiz.a]);
+
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                // We check against the literal string value defined in 'c'
+                btn.onclick = () => checkAnswer(opt, quiz.c, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedText, correctText, btn) {
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            
+            if(selectedText === correctText) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                // Auto-highlight the correct one so the student learns
+                allBtns.forEach(b => {
+                    if(b.innerText === correctText) b.classList.add('correct-flash');
+                });
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+
+        initQuiz();
+    </script>
+</body>
+</html>

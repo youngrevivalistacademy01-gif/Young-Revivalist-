@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Understanding Purpose Quiz | YRA</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* White Theme Overrides */
+        body.portal-body { background-color: #ffffff; color: #1a1a1a; }
+        .sanctuary-header { background: rgba(255,255,255,0.9); border-bottom: 1px solid #eee; }
+        .nav-brand { color: #1a1a1a; }
+        .back-link { color: #666; }
+        #quiz-box { background: #fcfcfc; border: 1px solid #f0f0f0; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .quiz-row { background: #ffffff; border: 1px solid #eee; color: #1a1a1a; }
+        .quiz-row:hover { border-color: var(--primary); background: #fffaf9; }
+        #passkey-input { background: #ffffff; border: 1px solid #ddd; color: #1a1a1a; }
+        .portal-intro h1 { color: #1a1a1a; }
+        .portal-intro p { color: #555; }
+        
+        /* Feedback Colors for Light Mode */
+        .correct-flash { border-color: #2e7d32 !important; background: #e8f5e9 !important; color: #2e7d32 !important; }
+        .wrong-flash { border-color: #c62828 !important; background: #ffebee !important; color: #c62828 !important; }
+    </style>
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro" style="text-align: left; margin-bottom: 20px;">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.4rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary);">0/10</h1>
+                <p>You were created for a specific assignment in the Kingdom.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Purpose Quiz Result">
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "According to Ephesians 2:10, the believer’s purpose is primarily:", a: ["Self-discovery through ambition", "To fulfill works prepared by God in union with Christ", "To seek comfort and avoid suffering", "To pursue success defined by culture"], c: 1 },
+            { q: "Proverbs 19:21 teaches that:", a: ["Human planning equals God’s authority", "Human desire always aligns with divine will", "God’s purpose will ultimately overrule personal plans", "Purpose is determined by circumstances"], c: 2 },
+            { q: "The ultimate purpose of every believer, according to Matthew 22:37–39, is to:", a: ["Gain influence and recognition", "Love God and reveal His love to others", "Become successful in ministry assignments", "Gain spiritual gifts and power"], c: 1 },
+            { q: "One major reason many fail in life according to the teaching is because they:", a: ["Lack academic qualifications", "Ignore divine purpose for personal ambitions", "Are influenced by their environment", "Do not have spiritual gifts"], c: 1 },
+            { q: "Which statement best explains why purpose provides strength in difficult times?", a: ["Purpose eliminates suffering completely", "Purpose removes emotional struggles", "Purpose supplies inner conviction beyond circumstances", "Purpose guarantees immediate breakthroughs"], c: 2 },
+            { q: "Discovering purpose requires dependency on God because:", a: ["Purpose is unpredictable", "God alone knows the blueprint and reveals it step-by-step", "The Holy Spirit cannot guide decisions", "Human wisdom automatically leads to destiny"], c: 1 },
+            { q: "The difference between vocation (job) and calling (purpose) is:", a: ["Job is eternal, calling is temporary", "Job is for a living; calling is the impact you were born for", "Calling produces wealth while a job does not", "They are always the same"], c: 1 },
+            { q: "Talent, gift, skill, vision, and passion collectively help a person:", a: ["Build a brand before character", "Identify the divine assignment God intends", "Avoid correction from mentors", "Become superior to others"], c: 1 },
+            { q: "Why is identity crucial for fulfilling purpose?", a: ["Identity prevents spiritual warfare", "Identity in Christ gives clarity and authority for assignment", "Identity eliminates emotional struggles", "Identity guarantees immediate financial success"], c: 1 },
+            { q: "According to 2 Corinthians 5:18–21, believers exist on earth primarily to:", a: ["Pursue personal goals before obedience", "Replace the ministry of Christ", "Represent Christ and reconcile people to God", "Achieve influence before serving God"], c: 2 }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(idx === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns[correct].classList.add('correct-flash');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

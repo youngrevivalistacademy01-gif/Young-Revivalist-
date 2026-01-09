@@ -1,0 +1,252 @@
+/* --- CORE RESET & FONTS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --primary: #FF7B54;
+    --dark: #1a1a1a;
+    --glass: rgba(255, 255, 255, 0.85);
+    --bg-light: #fdfdfd;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+/* --- TOP NAVIGATION BAR --- */
+.sanctuary-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    z-index: 1000;
+}
+
+.nav-brand {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--dark);
+    text-decoration: none;
+}
+
+.nav-brand span {
+    color: var(--primary);
+}
+
+.top-nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s ease;
+}
+
+.nav-item i {
+    font-size: 1.1rem;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: var(--primary);
+}
+
+/* --- DASHBOARD LAYOUT --- */
+.dashboard-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.welcome-block {
+    margin-bottom: 40px;
+}
+
+.welcome-block p {
+    color: #888;
+    font-weight: 600;
+}
+
+.welcome-block h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-style: italic;
+    color: var(--dark);
+}
+
+.welcome-block h1 span {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* --- MODULE GRID --- */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.module-card {
+    background: white;
+    padding: 25px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+}
+
+.module-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 123, 84, 0.1);
+    color: var(--primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.module-card h3 {
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.progress-container {
+    margin-top: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .sanctuary-header {
+        padding: 12px 15px;
+    }
+
+    .nav-brand {
+        font-size: 1.2rem;
+    }
+
+    .top-nav-links {
+        gap: 15px;
+    }
+
+    .nav-item span {
+        display: none; /* Hide labels on mobile to prevent cropping */
+    }
+
+    .nav-item i {
+        font-size: 1.3rem;
+    }
+
+    .module-grid {
+        grid-template-columns: 1fr; /* Single column stack */
+    }
+}
+
+
+/* --- MEDITATION BOX STYLES --- */
+.scripture-meditation {
+    width: 100%;
+    margin-bottom: 35px;
+    perspective: 1000px;
+}
+
+.meditation-box {
+    position: relative;
+    width: 100%;
+    min-height: 180px; /* Adjust based on text length */
+    background: linear-gradient(135deg, #111, #222);
+    border-radius: 24px;
+    padding: 30px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.fading-content {
+    position: absolute;
+    width: 85%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 1s ease-in-out;
+    pointer-events: none;
+}
+
+.fading-content.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.fading-content p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #eee;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.fading-content span.ref {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+    .meditation-box { min-height: 220px; padding: 20px; }
+    .fading-content p { font-size: 1.15rem; }
+}
+
+

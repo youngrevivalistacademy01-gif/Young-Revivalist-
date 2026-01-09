@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Person of Jesus Quiz | YRA</title>
+    <link rel="stylesheet" href="ID-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="quiz-portal.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <i class="fa-solid fa-crown" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <span class="badge">Assessment Complete</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary); margin: 10px 0;">0/10</h1>
+                <p>He is the radiance of God’s glory.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Person of Jesus Quiz Result">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/quiz-portal.html">
+                
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "According to Scripture, Jesus Christ is the ultimate revelation of God because He:", a: ["Introduced a new moral system", "Is the embodiment and manifestation of God’s character", "Represented God symbolically", "Replaced the prophets"], c: "Is the embodiment and manifestation of God’s character" },
+            { q: "The term monogenes teaches that Jesus:", a: ["Was created before time", "Is God’s most favored servant", "Shares the same essence and nature as the Father", "Is similar to God but not equal"], c: "Shares the same essence and nature as the Father" },
+            { q: "Hebrews 1:3 describes Jesus as:", a: ["A reflection of divine power", "The exact representation of God’s being", "A messenger sent from heaven", "A visible angelic form"], c: "The exact representation of God’s being" },
+            { q: "Jesus’ eternal relationship with the Father (John 17:24) primarily reveals His:", a: ["Obedience as a Son", "Mission to humanity", "Divine nature and pre-existence", "Humanity and suffering"], c: "Divine nature and pre-existence" },
+            { q: "Philippians 2:9–11 teaches that the exaltation of Jesus’ name results in:", a: ["Worship from believers only", "Universal acknowledgment of His lordship", "The removal of God the Father", "The end of earthly authority"], c: "Universal acknowledgment of His lordship" },
+            { q: "Jesus being seated at the right hand of the Father (Ephesians 1:20–21) signifies:", a: ["Rest after redemption", "Equality with angels", "Supreme authority over all rule and power", "Temporary honor"], c: "Supreme authority over all rule and power" },
+            { q: "The name “Jesus” (Yeshua) means:", a: ["God is holy", "Yahweh saves", "The Anointed King", "Son of Man"], c: "Yahweh saves" },
+            { q: "Calling on the name of Jesus implies:", a: ["Appealing to tradition", "Declaring religious identity", "Invoking God’s full authority and saving power", "Expressing personal devotion only"], c: "Invoking God’s full authority and saving power" },
+            { q: "Which of the following is NOT listed as part of Christ’s redemptive work?", a: ["Bearing the penalty for sin", "Destroying the power of death", "Reconciling humanity to God", "Eliminating human free will"], c: "Eliminating human free will" },
+            { q: "Jesus’ role as the “second Adam” means that He:", a: ["Removed physical death immediately", "Replaced creation", "Restored humanity to God’s image and oneness", "Abolished moral responsibility"], c: "Restored humanity to God’s image and oneness" }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            const shuffledOptions = shuffle([...quiz.a]);
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, quiz.c, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct, btn) {
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(selected === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns.forEach(b => {
+                    if(b.innerText === correct) b.classList.add('correct-flash');
+                });
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

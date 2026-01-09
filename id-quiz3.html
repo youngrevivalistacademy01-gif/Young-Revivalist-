@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Intimacy with the Father Quiz | YRA</title>
+    <link rel="stylesheet" href="ID-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="quiz-portal.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary);">0/10</h1>
+                <p>Draw near to God, and He will draw near to you.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Intimacy with the Father Quiz Result">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/quiz-portal.html">
+                
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "The Greek word koinonia primarily refers to:", a: ["Social interaction among believers", "Deep communion, sharing, and active partnership", "Religious obligation and discipline", "Corporate worship gatherings"], c: "Deep communion, sharing, and active partnership" },
+            { q: "James 4:8 teaches that intimacy with God is:", a: ["Initiated by drawing near to God", "Automatic for all believers", "Dependent on religious status", "Based on emotional experiences"], c: "Initiated by drawing near to God" },
+            { q: "According to 2 Peter 1:20–21, Scripture should be interpreted as:", a: ["Personal revelation unique to each reader", "Symbolic language without fixed meaning", "Words spoken by men moved by the Holy Spirit", "Inspired ideas refined by human wisdom"], c: "Words spoken by men moved by the Holy Spirit" },
+            { q: "“Rightly dividing the word of truth” (2 Timothy 2:15) emphasizes the need for:", a: ["Memorization without context", "Diligent and accurate interpretation", "Church tradition as final authority", "Spiritual intuition alone"], c: "Diligent and accurate interpretation" },
+            { q: "Which statement best distinguishes exegesis from eisegesis?", a: ["Exegesis applies Scripture; eisegesis explains history", "Exegesis is devotional; eisegesis is academic", "Exegesis is spiritual; eisegesis is intellectual", "Exegesis draws meaning from the text; eisegesis reads meaning into the text"], c: "Exegesis draws meaning from the text; eisegesis reads meaning into the text" },
+            { q: "Allowing Scripture to interpret Scripture primarily helps believers to:", a: ["Replace historical context", "Create new doctrines", "Maintain doctrinal consistency and balance", "Avoid personal Bible study"], c: "Maintain doctrinal consistency and balance" },
+            { q: "In the CATIP prayer model, beginning with Confession primarily serves to:", a: ["Earn God’s forgiveness", "Express fear of judgment", "Replace repentance", "Purify the heart for communion with God"], c: "Purify the heart for communion with God" },
+            { q: "The focus of Adoration in prayer is to:", a: ["Ask for guidance", "Present personal needs first", "Intercede for others", "Declare God’s attributes and character"], c: "Declare God’s attributes and character" },
+            { q: "According to John 10:27 and John 16:13, hearing God involves:", a: ["Personal intuition without testing", "Alignment with the Spirit of truth and Scripture", "Emotional impulses", "Signs and wonders only"], c: "Alignment with the Spirit of truth and Scripture" },
+            { q: "Which is the primary biblical test for discerning whether something is from God?", a: ["Whether it aligns with Scripture and glorifies Christ", "How powerful it feels", "Who delivered the message", "Whether it predicts the future"], c: "Whether it aligns with Scripture and glorifies Christ" }
+        ];
+
+        let currentQ = 0; 
+        let score = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            const shuffledOptions = shuffle([...quiz.a]);
+
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, quiz.c, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedText, correctText, btn) {
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            
+            if(selectedText === correctText) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns.forEach(b => {
+                    if(b.innerText === correctText) b.classList.add('correct-flash');
+                });
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+
+        initQuiz();
+    </script>
+</body>
+</html>

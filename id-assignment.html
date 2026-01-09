@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Assignment Portal | YRA</title>
+    <link rel="stylesheet" href="rules.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="sanctuary-theme">
+
+    <div class="aurora-bg"></div>
+
+    <div class="sanctuary-wrapper">
+        <nav class="floating-nav">
+            <div class="nav-brand">Y<span>R</span>A</div>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i></a>
+                <a href="identity-schedule.html" class="nav-item"><i class="fa-solid fa-route"></i></a>
+            </div>
+            <div class="nav-id">SUB</div>
+        </nav>
+
+        <main class="sanctuary-main">
+            <header class="sanctuary-header">
+                <div class="welcome-text">
+                    <p class="pre-title">Identity Track Submission</p>
+                    <h1>Journal & <span>Assignment</span></h1>
+                </div>
+            </header>
+
+            <div class="form-container">
+                
+                <section class="form-card">
+                    <h3><i class="fa-solid fa-paper-plane"></i> Direct Submission</h3>
+                    
+                    <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" class="submission-form">
+                        
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_subject" value="New Identity Assignment Submission!">
+
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label>Full Name</label>
+                                <input type="text" name="Student Name" placeholder="Your Name" required>
+                            </div>
+                            <div class="input-field">
+                                <label>Matric Number</label>
+                                <input type="text" name="Matric Number" placeholder="YRA/2026/..." required>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Identity Module Reviewing</label>
+                            <select name="Module">
+                                <option disabled selected>Select the module block...</option>
+                                <option>Module 1.0: Identity of God 1.0 (Existence & Nature)</option>
+                                <option>Module 2.0: Identity of God 2.0 (The Trinity)</option>
+                                <option>Module 3.0: Identity of a Believer</option>
+                                <option>Module 4.0: The Person of Jesus</option>
+                                <option>Module 5.0: Intimacy with the Father</option>
+                                <option>Module 6.0: Understanding Righteousness</option>
+                                <option>Module 7.0: The Kingdom Culture</option>
+                                <option>Module 8.0: Authority of a Believer</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Review & Reflection Content</label>
+                            <textarea name="Message" rows="8" placeholder="Paste your journal reflections or assignment responses here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-action-btn">Submit to Faculty</button>
+                    </form>
+                </section>
+
+                <section class="status-card">
+                    <h3><i class="fa-solid fa-circle-check"></i> Portal Status</h3>
+                    <p><small>Recipient: <strong>YRA Faculty Board</strong></small></p>
+                    <div class="status-line"></div>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-bolt"></i> Direct Faculty Feed</li>
+                        <li><i class="fa-solid fa-shield-halved"></i> 256-bit Encryption</li>
+                        <li><i class="fa-solid fa-envelope-circle-check"></i> Auto-Receipt Enabled</li>
+                    </ul>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

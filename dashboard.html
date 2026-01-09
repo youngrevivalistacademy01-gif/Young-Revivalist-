@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YRA | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-orange: #FF7B54;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-muted: #888888;
+            --glass-border: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Top Header Navigation */
+        header.nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.3rem; 
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--primary-orange); }
+
+        .nav-icons { 
+            display: flex; 
+            gap: 18px; 
+        }
+
+        .nav-icons a {
+            text-decoration: none;
+            color: #444;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons a:active {
+            color: var(--primary-orange);
+            transform: scale(0.9);
+        }
+
+        /* Main Container */
+        .container { 
+            padding: 20px; 
+            max-width: 500px; 
+            margin: 0 auto; 
+        }
+
+        /* Welcome Section */
+        .welcome-text { margin-bottom: 20px; }
+        .welcome-text p { 
+            color: var(--text-muted); 
+            margin: 0; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+        }
+        .welcome-text h1 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.9rem; 
+            margin: 5px 0 0 0; 
+            font-style: italic; 
+            line-height: 1.2;
+        }
+        .welcome-text h1 strong { 
+            font-family: 'Plus Jakarta Sans'; 
+            font-style: normal; 
+            text-transform: uppercase; 
+            font-weight: 800;
+        }
+
+        /* Carousel Section (Reduced Height) */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 160px; /* Slightly increased for longer verses */
+            margin-bottom: 25px;
+            overflow: hidden;
+            border-radius: 28px;
+            background: #1A1A1A;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        }
+
+        .carousel-slide {
+            display: none;
+            padding: 20px 25px;
+            text-align: center;
+            color: white;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeSlide 0.8s ease-in-out;
+        }
+
+        .carousel-slide.active { display: flex; }
+
+        .carousel-slide p { 
+            font-style: italic; 
+            font-size: 0.88rem; /* Scaled down slightly for fit */
+            line-height: 1.4; 
+            margin: 0 0 8px 0; 
+            font-family: 'Plus Jakarta Sans';
+            color: #E0E0E0;
+        }
+
+        .carousel-slide .reference { 
+            color: var(--primary-orange); 
+            font-weight: 800; 
+            letter-spacing: 1.5px; 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Pillar Navigation Cards */
+        .pillar-card {
+            background: var(--white);
+            border-radius: 28px;
+            padding: 30px 20px;
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pillar-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .icon-circle {
+            width: 44px;
+            height: 44px;
+            background: #FFF5F2;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-orange);
+            font-size: 1.2rem;
+        }
+
+        .pillar-card h2 { 
+            text-transform: uppercase; 
+            font-size: 1.2rem; 
+            margin: 0; 
+            letter-spacing: 1px; 
+            font-weight: 800;
+            color: #111;
+        }
+
+        .card-divider { 
+            height: 4px; 
+            background: #F2F2F2; 
+            width: 100%; 
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="nav-bar">
+        <div class="logo">Y<span>R</span>A</div>
+        <div class="nav-icons">
+            <a href="classes.html"><i class="fa-regular fa-calendar-check"></i></a>
+            <a href="rules.html"><i class="fa-solid fa-scroll"></i></a>
+            <a href="quiz-portal.html"><i class="fa-solid fa-hands-praying"></i></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="welcome-text">
+            <p>Welcome back, Revivalist</p>
+            <h1>The <strong>SPIRIT</strong> & The Word</h1>
+        </section>
+
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <p>"And it shall come to pass afterward, that I will pour out my spirit upon all flesh..."</p>
+                <div class="reference">Joel 2:28</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"His word was in mine heart as a burning fire shut up in my bones..."</p>
+                <div class="reference">Jeremiah 20:9</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"The Spirit of the Lord God is upon me; because the Lord hath anointed me to preach..."</p>
+                <div class="reference">Isaiah 61:1-3</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"And the things that thou hast heard of me... the same commit thou to faithful men..."</p>
+                <div class="reference">2 Timothy 2:2</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"And he gave some, apostles; and some, prophets... For the perfecting of the saints..."</p>
+                <div class="reference">Ephesians 4:11-12</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"Did not our heart burn within us, while he talked with us by the way..."</p>
+                <div class="reference">Luke 24:32</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"And I sought for a man among them, that should make up the hedge, and stand in the gap..."</p>
+                <div class="reference">Ezekiel 22:30</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"And be not conformed to this world: but be ye transformed by the renewing of your mind..."</p>
+                <div class="reference">Romans 12:2</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"But we all, with open face beholding as in a glass the glory of the Lord, are changed..."</p>
+                <div class="reference">2 Corinthians 3:18</div>
+            </div>
+            <div class="carousel-slide">
+                <p>"And in all matters of wisdom and understanding... he found them ten times better..."</p>
+                <div class="reference">Daniel 1:20</div>
+            </div>
+        </div>
+
+        <a href="spiritual-pillars.html?tab=intimacy" class="pillar-card">
+            <div class="icon-circle"><i class="fa-solid fa-compass"></i></div>
+            <h2>Intimacy</h2>
+            <div class="card-divider"></div>
+        </a>
+
+        <a href="spiritual-pillars.html?tab=fellowship" class="pillar-card">
+            <div class="icon-circle"><i class="fa-solid fa-masks-theater"></i></div>
+            <h2>Fellowship</h2>
+            <div class="card-divider"></div>
+        </a>
+
+        <a href="spiritual-pillars.html?tab=intercession" class="pillar-card">
+            <div class="icon-circle"><i class="fa-solid fa-heart"></i></div>
+            <h2>Intercession</h2>
+            <div class="card-divider"></div>
+        </a>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Slides change every 6 seconds to allow for reading
+        setInterval(showNextSlide, 6000);
+    </script>
+
+</body>
+</html>

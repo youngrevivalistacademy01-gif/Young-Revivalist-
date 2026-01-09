@@ -1,0 +1,160 @@
+/* --- QUIZ SPECIFIC STYLES --- */
+:root {
+    --primary: #FF7B54;
+    --success: #2e7d32;
+    --error: #c62828;
+    --bg: #0a0a0a;
+    --surface: #161616;
+    --text: #ffffff;
+    --text-dim: #888888;
+}
+
+body.portal-body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Container for the Quiz Content */
+.portal-container {
+    width: 92%;
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+/* The Question Card */
+#quiz-box {
+    background: var(--surface);
+    padding: 25px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.badge {
+    background: rgba(255, 123, 84, 0.1);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* Answer Option Buttons */
+.quiz-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.quiz-row {
+    width: 100%;
+    background: #1f1f1f;
+    border: 1px solid #333;
+    padding: 16px 20px;
+    border-radius: 16px;
+    color: var(--text);
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Interaction States */
+.quiz-row:hover {
+    border-color: var(--primary);
+}
+
+.quiz-row:active {
+    transform: scale(0.98);
+}
+
+/* Logic Classes (Applied via JS) */
+.correct-flash {
+    border-color: var(--success) !important;
+    background: rgba(46, 125, 50, 0.15) !important;
+    color: #81c784 !important;
+}
+
+.wrong-flash {
+    border-color: var(--error) !important;
+    background: rgba(198, 40, 40, 0.15) !important;
+    color: #e57373 !important;
+}
+
+/* Navigation Buttons */
+.unlock-btn {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 10px 20px rgba(255, 123, 84, 0.2);
+}
+
+/* Inputs for the Form */
+#passkey-input {
+    width: 100%;
+    background: #000;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+
+/* --- QUIZ.CSS --- */
+:root {
+    --primary: #FF7B54;
+    --success: #2e7d32;
+    --error: #c62828;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.portal-container { width: 92%; max-width: 500px; margin: 30px auto; }
+
+#quiz-box { padding: 25px; border-radius: 24px; transition: 0.3s; }
+
+.quiz-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+
+.quiz-row {
+    width: 100%; padding: 16px 20px; border-radius: 16px; 
+    text-align: left; font-size: 0.95rem; font-weight: 600; 
+    cursor: pointer; transition: 0.2s;
+}
+
+.correct-flash {
+    border: 2px solid var(--success) !important;
+    background: #e8f5e9 !important;
+    color: var(--success) !important;
+}
+
+.wrong-flash {
+    border: 2px solid var(--error) !important;
+    background: #ffebee !important;
+    color: var(--error) !important;
+}
+
+.unlock-btn {
+    width: 100%; background: var(--primary); color: white; border: none; 
+    padding: 18px; border-radius: 16px; font-weight: 800; cursor: pointer;
+}
+
+
+
+

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Understanding Righteousness | YRA</title>
+    <link rel="stylesheet" href="ID-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="quiz-portal.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container">
+        <section id="quiz-box">
+            <div class="portal-intro">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <i class="fa-solid fa-certificate" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <span class="badge">Assessment Complete</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: var(--primary); margin: 10px 0;">0/10</h1>
+                <p>You are the righteousness of God in Christ Jesus.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Understanding Righteousness Quiz Result">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/quiz-portal.html">
+                
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn">Submit to Archives</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "According to this study, righteousness is best defined as:", a: ["Moral perfection without failure", "The restoration of God’s mind and nature to humanity", "Public evidence of good behavior", "Obedience to religious laws"], c: "The restoration of God’s mind and nature to humanity" },
+            { q: "Righteousness is NOT sinlessness because:", a: ["Holiness replaces righteousness", "God overlooks sin completely", "Righteousness is an inner nature, not flawless behavior", "Sin no longer exists for believers"], c: "Righteousness is an inner nature, not flawless behavior" },
+            { q: "A righteous person may commit sin and still remain righteous because:", a: ["Sin no longer has consequences", "God ignores all actions", "Righteousness is based on church membership", "The heart still desires to please God"], c: "The heart still desires to please God" },
+            { q: "According to Romans 4 and Genesis 15:6, a person is counted righteous by:", a: ["Moral effort", "Faith in God’s promises", "Obedience to the Law", "Religious rituals"], c: "Faith in God’s promises" },
+            { q: "The primary difference between righteousness and holiness is that:", a: ["Holiness comes before righteousness", "Both mean the same thing", "Righteousness is the foundation; holiness is the fruit", "Righteousness is outward while holiness is inward"], c: "Righteousness is the foundation; holiness is the fruit" },
+            { q: "Why can holiness be manipulated before men but not righteousness?", a: ["Righteousness is examined and granted by God alone", "Holiness is temporary", "Righteousness is learned behavior", "Holiness is emotional"], c: "Righteousness is examined and granted by God alone" },
+            { q: "Imputed (positional) righteousness primarily addresses the problem of:", a: ["Moral addiction", "Spiritual immaturity", "Habitual sin", "Legal guilt and condemnation"], c: "Legal guilt and condemnation" },
+            { q: "Progressive (imparted) righteousness is best described as:", a: ["The ongoing work of the Holy Spirit renewing the mind", "Instant perfection at salvation", "Freedom from temptation", "Justification by faith alone"], c: "The ongoing work of the Holy Spirit renewing the mind" },
+            { q: "Which of the following is NOT listed as a property of lust in this study?", a: ["Lust of the eyes", "Pride of life", "Fear of man", "Lust of the flesh"], c: "Fear of man" },
+            { q: "According to the strategy for overcoming lust, lasting freedom is sustained by:", a: ["Occasional prayer and fasting", "Avoiding all temptation", "Consistent study and application of the Rhema word", "Personal discipline alone"], c: "Consistent study and application of the Rhema word" }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            const shuffledOptions = shuffle([...quiz.a]);
+
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, quiz.c, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct, btn) {
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(selected === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns.forEach(b => {
+                    if(b.innerText === correct) b.classList.add('correct-flash');
+                });
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>

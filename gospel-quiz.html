@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gospel Foundation Quiz | YRA</title>
+    <link rel="stylesheet" href="academy.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="schedule.html" class="nav-item"><i class="fa-solid fa-calendar"></i></a>
+            <a href="assignment.html" class="nav-item"><i class="fa-solid fa-pen"></i></a>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        
+        <section id="quiz-box" class="quiz-card">
+            <div class="welcome-block">
+                <p id="q-count">Question 1 of 10</p>
+                <h1 id="q-text">Loading question...</h1>
+            </div>
+
+            <div id="options-container" class="options-grid">
+                </div>
+
+            <button id="next-btn" class="submit-btn hidden" onclick="nextQuestion()">Next Question</button>
+        </section>
+
+        <section id="results-box" class="quiz-card hidden">
+            <div class="welcome-block" style="text-align: center;">
+                <p>Assessment Complete</p>
+                <h1 id="final-score">0/10</h1>
+                <p id="feedback-msg">Well done, Revivalist.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" class="auth-form">
+                <input type="hidden" name="_subject" value="Quiz Results: Gospel Foundations">
+                <input type="text" name="Student Name" placeholder="Full Name" class="custom-input" required>
+                <input type="text" name="Matric" placeholder="Matric Number" class="custom-input" required>
+                <input type="hidden" name="Final Score" id="score-hidden">
+                <button type="submit" class="submit-btn">Send Result to Faculty</button>
+            </form>
+        </section>
+
+    </main>
+
+    <script>
+        const questions = [
+            { q: "The origin of the Gospel reveals that salvation was not an afterthought, but an eternal plan. This indicates:", a: ["God reacted only after the fall", "The Gospel formed during Jesus' ministry", "God prepared redemption before creation", "Salvation is only for humans"], c: 2 },
+            { q: "Lucifer’s rebellion introduces the principle that spiritual fall begins when:", a: ["Fear of judgment is lost", "Pride challenges authority for self-exaltation", "Angels want more assignments", "Creation fails to understand God"], c: 1 },
+            { q: "The Gap Theory (Genesis 1:1–2) is significant because it provides:", a: ["Scientific age of the earth", "Theological bridge for pre-man spiritual chaos", "Proof Adam lived before angels", "Evidence God didn't create earth"], c: 1 },
+            { q: "Adam’s disobedience did more than introduce sin; it also:", a: ["Destroyed physical form", "Transferred man’s spiritual authority to Satan", "Ended God's relationship with creation", "Removed ministering angels"], c: 1 },
+            { q: "Genesis 3:15 is the 'Protoevangelium' because it:", a: ["Introduced law and sacrifice", "Prophetically announced a Redeemer to defeat the serpent", "Detailed Adam's punishment", "Established Israel as chosen"], c: 1 },
+            { q: "The Gospel of Salvation emphasizes deliverance from sin primarily by:", a: ["Human repentance/discipline", "Christ’s finished work restoring fellowship", "Continuous animal sacrifices", "Obeying the Mosaic Law"], c: 1 },
+            { q: "The doctrine of Propitiation means that:", a: ["Man is now equal to God", "Jesus’ sacrifice satisfied justice and removed wrath", "Salvation is by personal righteousness", "Angels now intercede"], c: 1 },
+            { q: "Justification differs from Regeneration in that justification:", a: ["Changes moral nature", "Declares the believer righteous legally", "Removes sinful habits", "Occurs gradually"], c: 1 },
+            { q: "Experiential Sanctification (Transformation) is necessary because:", a: ["Soul must align with renewed spirit", "Salvation of spirit is incomplete", "God does not save the soul", "Salvation is earned by character"], c: 0 },
+            { q: "Being 'Born Again' is essential because it:", a: ["Introduces prophetic ministry", "Enables miracles", "Restores Zoë life and Kingdom citizenship", "Grants immediate perfection"], c: 2 }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.disabled = true);
+            if(idx === correct) {
+                btn.classList.add('correct');
+                score++;
+            } else {
+                btn.classList.add('wrong');
+                allBtns[correct].classList.add('correct');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-box').classList.add('hidden');
+            document.getElementById('results-box').classList.remove('hidden');
+            document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+            document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+        }
+
+        initQuiz();
+    </script>
+</body>
+</html>

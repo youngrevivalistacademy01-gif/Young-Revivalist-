@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Saving Faith Quiz | YRA</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Black Theme Overrides */
+        body.portal-body { background-color: #000000; color: #ffffff; }
+        .sanctuary-header { background: rgba(0,0,0,0.9); border-bottom: 1px solid #1a1a1a; }
+        .nav-brand { color: #ffffff; }
+        .back-link { color: #888; }
+        #quiz-box { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 25px; border-radius: 24px; }
+        .quiz-row { background: #111111; border: 1px solid #222; color: #ffffff; text-decoration: none; display: block; width: 100%; text-align: left; padding: 16px; margin-bottom: 10px; border-radius: 12px; cursor: pointer;}
+        .quiz-row:hover { border-color: var(--primary); background: #161616; }
+        #passkey-input { background: #000000; border: 1px solid #333; color: #ffffff; padding: 15px; width: 100%; border-radius: 10px; }
+        .portal-intro h1 { color: #ffffff; }
+        
+        /* Dark Mode Feedback */
+        .correct-flash { border-color: #2e7d32 !important; background: rgba(46, 125, 50, 0.2) !important; color: #81c784 !important; }
+        .wrong-flash { border-color: #c62828 !important; background: rgba(198, 40, 40, 0.2) !important; color: #e57373 !important; }
+    </style>
+</head>
+<body class="portal-body">
+
+    <header class="sanctuary-header">
+        <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
+        <nav class="top-nav-links">
+            <a href="quiz-portal.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Exit Quiz</a>
+        </nav>
+    </header>
+
+    <main class="portal-container" style="max-width: 500px; margin: 30px auto; width: 92%;">
+        <section id="quiz-box">
+            <div class="portal-intro" style="text-align: left; margin-bottom: 20px;">
+                <span class="badge" id="q-count">Question 1 of 10</span>
+                <h1 id="q-text" style="font-size: 1.3rem; font-family: 'Plus Jakarta Sans'; font-style: normal; margin-top: 15px; line-height: 1.4;">
+                    Loading...
+                </h1>
+            </div>
+
+            <div id="options-container" class="quiz-stack"></div>
+
+            <button id="next-btn" class="unlock-btn hidden" onclick="nextQuestion()" style="width: 100%; background: #FF7B54; border: none; padding: 18px; border-radius: 12px; color: white; font-weight: 800; margin-top: 10px;">Next Question</button>
+        </section>
+
+        <section id="results-box" class="hidden" style="text-align: center; padding: 40px 20px;">
+            <div class="portal-intro">
+                <span class="badge">Assessment Result</span>
+                <h1 id="final-score" style="font-size: 3.5rem; color: #FF7B54;">0/10</h1>
+                <p>The just shall live by faith.</p>
+            </div>
+
+            <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" style="width: 100%;">
+                <input type="hidden" name="_subject" value="Saving Faith Quiz Result">
+                <input type="text" name="Name" placeholder="Full Name" id="passkey-input" required style="margin-bottom: 10px;">
+                <input type="text" name="Matric" placeholder="Matric Number" id="passkey-input" required>
+                <input type="hidden" name="Score" id="score-hidden">
+                <button type="submit" class="unlock-btn" style="width: 100%; background: #FF7B54; border: none; padding: 18px; border-radius: 12px; color: white; font-weight: 800; margin-top: 20px;">Submit Result</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const questions = [
+            { q: "According to Ephesians 2:8 (AMP), salvation is described as:", a: ["A reward for moral behavior", "A partnership of effort and grace", "A free gift of grace through faith", "A result of religious discipline"], c: 2 },
+            { q: "Why is belief alone not equivalent to saving faith?", a: ["Belief is only emotional", "Demons also believe yet remain unsaved", "Belief requires church attendance", "Belief comes from family background"], c: 1 },
+            { q: "The teaching states that genuine faith formula is:", a: ["Faith = Confidence - Action", "Faith = Belief + Knowledge Alone", "Faith = Belief + Action + Confidence", "Faith = Works + Emotion + Conviction"], c: 2 },
+            { q: "When Scripture says 'faith without works is dead', it means:", a: ["Works earn salvation", "Faith is validated by visible obedience", "Works replace personal belief", "Faith is irrelevant without membership"], c: 1 },
+            { q: "What distinguishes Saving Faith from intellectual belief?", a: ["It does not require obedience", "It guarantees emotional excitement", "It involves heart trust and obedience", "It applies only to leaders"], c: 2 },
+            { q: "According to Romans 10:9, saving faith begins with:", a: ["Reciting creeds", "Confessing Jesus as Lord and His resurrection", "Church sacraments", "Memorizing doctrines"], c: 1 },
+            { q: "The component of 'Trust' in Saving Faith means:", a: ["Believing works contribute to salvation", "Depending solely on Christ, not personal merit", "Relying on positive thinking", "Assuming forgiveness without repentance"], c: 1 },
+            { q: "What does a 'lack of results' in a spiritual journey reveal?", a: ["No faith at all", "Lack of confidence in God's Word", "Not called by God", "Salvation is invalid"], c: 1 },
+            { q: "According to Romans 4:5, righteousness is given to the one who:", a: ["Works tirelessly to prove worth", "Believes in Him who justifies the ungodly", "Attends gatherings consistently", "Lives flawlessly without sin"], c: 1 },
+            { q: "Hebrews 5:9 teaches Christ is the author of salvation to those who:", a: ["Only believe intellectually", "Feel spiritually inspired", "Obey Him, demonstrating faith through action", "Live morally without faith"], c: 2 }
+        ];
+
+        let currentQ = 0; let score = 0;
+
+        function initQuiz() {
+            const quiz = questions[currentQ];
+            document.getElementById('q-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+            document.getElementById('q-text').innerText = quiz.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            quiz.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-row';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const correct = questions[currentQ].c;
+            const allBtns = document.querySelectorAll('.quiz-row');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            if(idx === correct) {
+                btn.classList.add('correct-flash');
+                score++;
+            } else {
+                btn.classList.add('wrong-flash');
+                allBtns[correct].classList.add('correct-flash');
+            }
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) {
+                document.getElementById('next-btn').classList.add('hidden');
+                initQuiz();
+            } else {
+                document.getElementById('quiz-box').style.display = 'none';
+                document.getElementById('results-box').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+                document.getElementById('score-hidden').value = `${score}/${questions.length}`;
+            }
+        }
+        initQuiz();
+    </script>
+</body>
+</html>
