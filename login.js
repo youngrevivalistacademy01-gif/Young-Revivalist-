@@ -31,6 +31,6 @@ loginBtn.addEventListener('click', async () => {
     } else {
         // 2. Success! Redirect to the student portal
         loginBtn.innerText = "ACCESS GRANTED";
-        window.location.href = "dash.html";
+        window.location.href = "dashboard.html";
     }
 });
