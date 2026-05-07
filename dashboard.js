@@ -76,7 +76,7 @@ async function checkNotifications(studentId) {
 
 if (logoutTrigger) {
     logoutTrigger.addEventListener('click', async () => {
-        const confirmLogout = confirm("Are you sure you want to leave the Academy?");
+        const confirmLogout = confirm("Are you sure you want to log out?");
         if (confirmLogout) {
             // Sign out from Supabase
             const { error } = await client.auth.signOut();
