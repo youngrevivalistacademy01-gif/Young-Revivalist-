@@ -2,103 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YRA Portal | The Spirit & The Word</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Revivalist Dashboard | YRA</title>
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
-    <div class="glass-bg"></div>
-
-    <main class="app-shell">
+    <div class="app-container">
         <header class="main-header">
-            <div class="brand">Y<span>R</span>A</div>
-            <div class="user-status">
-                <span class="status-dot"></span> Online
+            <div class="logo">YRA</div>
+            <div class="header-right">
+                <a href="notification.html" class="noti-trigger">
+                    <i class="far fa-bell"></i>
+                    <span id="global-noti-dot" class="noti-badge" style="display: none;"></span>
+                </a>
+                <div class="status-indicator">
+                    <span class="status-dot"></span> <span id="student-status">CONNECTING</span>
+                </div>
             </div>
         </header>
 
-        <section class="hero-brand">
-            <h1>The Spirit <br>& The Word</h1>
-            <p>Welcome back, Revivalist</p>
+        <section class="welcome-section">
+            <h1 class="brand-text">The Spirit<br>& The Word</h1>
+            <p class="greeting">Welcome back, <span id="student-name">Revivalist</span>.</p>
+            <div class="id-badge">
+                <span class="label">MATRIC NUMBER</span>
+                <span id="matric-no">YRA / ---</span>
+            </div>
         </section>
 
-        <nav class="tool-ribbon">
-            <a href="classes.html" class="tool-card">
-                <div class="icon-wrap calendar"><i class="fa-regular fa-calendar-check"></i></div>
-                <span>Schedule</span>
+        <nav class="quick-nav">
+            <a href="classes.html" class="nav-card">
+                <div class="icon-box red-icon"><i class="far fa-calendar-alt"></i></div>
+                <label>SCHEDULE</label>
             </a>
-            <a href="rules.html" class="tool-card">
-                <div class="icon-wrap rules"><i class="fa-solid fa-scroll"></i></div>
-                <span>Rules</span>
+            <a href="rules.html" class="nav-card">
+                <div class="icon-box blue-icon"><i class="far fa-bookmark"></i></div>
+                <label>RULES</label>
             </a>
-            <a href="quiz-portal.html" class="tool-card">
-                <div class="icon-wrap quiz"><i class="fa-solid fa-hands-praying"></i></div>
-                <span>Quiz</span>
+            <a href="quiz-portal.html" class="nav-card">
+                <div class="icon-box purple-icon">
+                    <i class="far fa-lightbulb"></i>
+                    <span class="noti-dot" id="quiz-noti"></span>
+                </div>
+                <label>QUIZ</label>
             </a>
-
-            <a href="assignment-dashboard.html" class="tool-card">
-    <div class="icon-wrap assignment"><i class="fa-solid fa-file-signature"></i></div>
-    <span>Assignment Portal</span>
-</a>
-
-
-            
+            <a href="assignment-dashboard.html" class="nav-card">
+                <div class="icon-box dark-icon"><i class="fas fa-edit"></i></div>
+                <label>ASSIGNMENT</label>
+            </a>
         </nav>
 
-        <div class="scripture-vault">
-            <div class="carousel-track" id="carouselTrack">
-                <div class="carousel-slide active">
-                    <p>"And it shall come to pass afterward, that I will pour out my spirit upon all flesh..."</p>
-                    <span class="ref">Joel 2:28</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"His word was in mine heart as a burning fire shut up in my bones..."</p>
-                    <span class="ref">Jeremiah 20:9</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"The Spirit of the Lord God is upon me; because the Lord hath anointed me to preach..."</p>
-                    <span class="ref">Isaiah 61:1-3</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"And the things that thou hast heard of me... the same commit thou to faithful men..."</p>
-                    <span class="ref">2 Timothy 2:2</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"And he gave some, apostles; and some, prophets... For the perfecting of the saints..."</p>
-                    <span class="ref">Ephesians 4:11-12</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"Did not our heart burn within us, while he talked with us by the way..."</p>
-                    <span class="ref">Luke 24:32</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"And I sought for a man among them, that should make up the hedge, and stand in the gap..."</p>
-                    <span class="ref">Ezekiel 22:30</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"And be not conformed to this world: but be ye transformed by the renewing of your mind..."</p>
-                    <span class="ref">Romans 12:2</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"But we all, with open face beholding as in a glass the glory of the Lord, are changed..."</p>
-                    <span class="ref">2 Corinthians 3:18</span>
-                </div>
-                <div class="carousel-slide">
-                    <p>"And in all matters of wisdom and understanding... he found them ten times better..."</p>
-                    <span class="ref">Daniel 1:20</span>
-                </div>
+        <section class="scripture-carousel" id="scripture-carousel">
+            <div class="carousel-content">
+                <blockquote id="scripture-text">“And he gave some, apostles; and some, prophets...”</blockquote>
+                <p class="reference" id="scripture-ref">Ephesians 4:11-12</p>
             </div>
-        </div>
+        </section>
+
+        <section class="focus-section">
+            <div class="focus-tabs">
+                <button class="focus-btn active">Intimacy</button>
+                <button class="focus-btn">Fellowship</button>
+                <button class="focus-btn">Intercession</button>
+            </div>
+            <div class="module-content">
+                <h3 id="cohort-display">FOUNDATIONAL COHORT</h3>
+                <p id="focus-module-name">Module 1: The Gospel</p>
+                <progress value="30" max="100" id="focus-progress"></progress>
+            </div>
+        </section>
 
         <footer class="bottom-nav">
-            <a href="spiritual-pillars.html?tab=intimacy" class="nav-pill active">Intimacy</a>
-            <a href="spiritual-pillars.html?tab=fellowship" class="nav-pill">Fellowship</a>
-            <a href="spiritual-pillars.html?tab=intercession" class="nav-pill">Intercession</a>
+            <div class="nav-item active"><a href="#"><i class="fas fa-home"></i></a></div>
+            <div class="nav-item"><a href="classes.html"><i class="fas fa-book"></i></a></div>
+            <div class="nav-item" id="logout-trigger"><i class="fas fa-sign-out-alt"></i></div>
         </footer>
-    </main>
-
-    <script src="script.js"></script>
+    </div>
+    <script src="dashboard.js"></script>
 </body>
 </html>
