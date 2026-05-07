@@ -1,0 +1,79 @@
+:root {
+    --admin-bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --accent-orange: #ff6b3d;
+    --text-dim: #a1a1a6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { background: var(--admin-bg); color: #fff; display: flex; height: 100vh; overflow: hidden; }
+
+.admin-wrapper { display: flex; width: 100%; height: 100vh; }
+
+/* Sidebar */
+.sidebar { width: 260px; background: #000; padding: 40px 20px; border-right: 1px solid #222; flex-shrink: 0; }
+.admin-logo { font-weight: 900; letter-spacing: 2px; margin-bottom: 50px; }
+.admin-logo span { color: var(--accent-orange); }
+.nav-item { padding: 15px; border-radius: 12px; color: var(--text-dim); cursor: pointer; margin-bottom: 10px; transition: 0.3s; }
+.nav-item.active, .nav-item:hover { background: #1a1a1a; color: #fff; }
+
+/* Main Content */
+.content-area { flex: 1; padding: 40px; overflow-y: auto; height: 100vh; }
+.content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; gap: 20px; flex-wrap: wrap; }
+.stats-bar { display: flex; gap: 40px; }
+.stat .label { font-size: 10px; font-weight: 800; color: var(--text-dim); letter-spacing: 1px; }
+.search-box { background: var(--card-bg); padding: 10px 20px; border-radius: 50px; border: 1px solid #333; display: flex; align-items: center; flex: 1; max-width: 400px; }
+.search-box input { background: none; border: none; color: #fff; margin-left: 10px; outline: none; width: 100%; }
+
+/* Student Grid */
+.student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.student-card { background: var(--card-bg); padding: 25px; border-radius: 24px; border: 1px solid #222; transition: 0.3s; }
+.student-card:hover { border-color: var(--accent-orange); transform: translateY(-5px); }
+.student-card h4 { margin-bottom: 5px; font-size: 18px; }
+.student-card p { font-size: 12px; color: var(--text-dim); margin-bottom: 20px; }
+.msg-btn { width: 100%; background: var(--accent-orange); border: none; padding: 12px; border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; }
+
+/* Drawer */
+.drawer { position: fixed; right: -450px; top: 0; width: 400px; height: 100vh; background: #111; border-left: 1px solid #333; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); padding: 40px; z-index: 100; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+.drawer.open { right: 0; }
+.drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.drawer-header button { background: none; border: none; color: #fff; font-size: 30px; cursor: pointer; }
+.drawer-body input, .drawer-body textarea { width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 12px; color: #fff; margin-bottom: 20px; outline: none; }
+.drawer-body textarea { height: 200px; resize: none; }
+#send-btn { width: 100%; background: #fff; color: #000; border: none; padding: 15px; border-radius: 12px; font-weight: 800; cursor: pointer; }
+
+/* --- MOBILE RESPONSIVE ADAPTATION --- */
+@media (max-width: 768px) {
+    body { flex-direction: column; overflow: auto; }
+    .admin-wrapper { flex-direction: column; height: auto; }
+
+    /* Convert Sidebar to Top Header */
+    .sidebar { width: 100%; height: auto; padding: 20px; border-right: none; border-bottom: 1px solid #222; }
+    .admin-logo { margin-bottom: 20px; text-align: center; }
+    .sidebar nav { display: flex; justify-content: space-around; gap: 10px; }
+    .nav-item { margin-bottom: 0; padding: 10px 15px; font-size: 13px; }
+
+    /* Adjust Content Area */
+    .content-area { padding: 20px; overflow-y: visible; }
+    .content-header { flex-direction: column; align-items: flex-start; }
+    .stats-bar { width: 100%; justify-content: space-between; }
+    .search-box { max-width: 100%; width: 100%; }
+
+    /* Grid adjustment */
+    .student-grid { grid-template-columns: 1fr; }
+
+    /* Transform side drawer into a bottom sheet */
+    .drawer { 
+        right: 0; 
+        top: auto;
+        bottom: -100%; 
+        width: 100%; 
+        height: 85vh; 
+        border-left: none; 
+        border-top: 1px solid #333; 
+        border-radius: 30px 30px 0 0; 
+        padding: 30px 20px;
+        transition: bottom 0.4s ease;
+    }
+    .drawer.open { bottom: 0; right: 0; }
+}

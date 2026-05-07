@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Admin Portal | YRA</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="wrapper admin-theme"> <header>
+            <p class="est" style="color: #ff6b3d;">SECURE LINE</p>
+            <h1>COMMAND<br>CENTER<br><span class="outline">ADMIN</span></h1>
+        </header>
+
+        <main class="login-card">
+            <h2>ADMIN PORTAL</h2>
+            <p class="tagline">Enter credentials for oversight.</p>
+
+            <div class="input-container">
+                <label>ADMIN EMAIL</label>
+                <input type="email" id="admin-email" placeholder="admin@vra.org">
+            </div>
+
+            <div class="input-container">
+                <label>MASTER KEY</label>
+                <input type="password" id="admin-password" placeholder="••••••••">
+            </div>
+
+            <button id="admin-login-btn" style="background: #000; color: #fff; border: 1px solid #333;">AUTHORIZE ACCESS</button>
+            <p id="admin-error-msg" style="color: #ff3b30; font-size: 12px; margin-top: 10px;"></p>
+            
+            <div class="admin-gate">
+                <a href="login.html">RETURN TO STUDENT PORTAL</a>
+            </div>
+        </main>
+    </div>
+    <script src="admin-login.js"></script>
+</body>
+</html>

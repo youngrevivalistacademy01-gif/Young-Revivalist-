@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Center | YRA Admin</title>
+    <link rel="stylesheet" href="admin-dash.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="admin-logo">YRA <span>ADMIN</span></div>
+            <nav>
+                <div class="nav-item active"><i class="fas fa-users"></i> Revivalists</div>
+                <div class="nav-item"><i class="fas fa-bullhorn"></i> Broadcast</div>
+                <div class="nav-item" onclick="logout()"><i class="fas fa-power-off"></i> Exit</div>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <header class="content-header">
+                <div class="stats-bar">
+                    <div class="stat">
+                        <span class="label">TOTAL STUDENTS</span>
+                        <h2 id="total-students">0</h2>
+                    </div>
+                    <div class="stat">
+                        <span class="label">ACTIVE COHORTS</span>
+                        <h2 id="active-cohorts">---</h2>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="studentSearch" placeholder="Search by name or matric...">
+                </div>
+            </header>
+
+            <section class="student-grid" id="studentGrid">
+                <div class="loader">Loading the Army...</div>
+            </section>
+        </main>
+
+        <div id="messageDrawer" class="drawer">
+            <div class="drawer-header">
+                <h3>Direct Message</h3>
+                <button onclick="closeDrawer()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <p>To: <strong id="target-student-name">...</strong></p>
+                <input type="text" id="msg-title" placeholder="Message Title (e.g. Prophetic Word)">
+                <textarea id="msg-content" placeholder="Type your message to this revivalist..."></textarea>
+                <button id="send-btn" onclick="sendMessage()">PUSH NOTIFICATION</button>
+            </div>
+        </div>
+    </div>
+    <script src="admin-dash.js"></script>
+</body>
+</html>
