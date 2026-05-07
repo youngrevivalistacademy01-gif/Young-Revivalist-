@@ -11,15 +11,20 @@ const scriptures = [
 
 let currentIndex = 0;
 
+// 1. MAIN INITIALIZATION
 async function initDashboard() {
-    // 1. Authenticate User
-    const { data: { user } } = await client.auth.getUser();
-    if (!user) {
+    // Check for session first (fastest way to prevent auto-logout)
+    const { data: { session } } = await client.auth.getSession();
+
+    if (!session) {
+        console.warn("Unauthorized access. Redirecting to login...");
         window.location.href = "login.html";
         return;
     }
 
-    // 2. Fetch Personal Data
+    const user = session.user;
+
+    // 2. FETCH PROFILE DATA
     const { data: profile, error } = await client
         .from('profiles')
         .select('full_name, matric_num, cohort')
@@ -31,17 +36,39 @@ async function initDashboard() {
         document.getElementById('matric-no').innerText = profile.matric_num;
         document.getElementById('cohort-display').innerText = `${profile.cohort.toUpperCase()} COHORT`;
         document.getElementById('student-status').innerText = "ONLINE";
+        
+        // Check for notifications once profile is confirmed
+        checkNotifications(user.id);
+    } else {
+        console.error("Profile fetch error:", error);
     }
 
-    // 3. Start Scripture Carousel
+    // 3. START SCRIPTURE CAROUSEL
     rotateScripture();
     setInterval(rotateScripture, 8000);
 }
 
+// 2. NOTIFICATION SYSTEM
+async function checkNotifications(studentId) {
+    const { count, error } = await client
+        .from('notifications')
+        .select('*', { count: 'exact', head: true })
+        .eq('student_id', studentId)
+        .eq('is_read', false);
+
+    const notiDot = document.getElementById('global-noti-dot');
+    if (!error && count > 0 && notiDot) {
+        notiDot.style.display = 'block';
+    }
+}
+
+// 3. UI LOGIC (SCRIPTURES)
 function rotateScripture() {
     const section = document.getElementById('scripture-carousel');
     const text = document.getElementById('scripture-text');
     const ref = document.getElementById('scripture-ref');
+
+    if (!section || !text || !ref) return;
 
     section.style.opacity = '0';
     setTimeout(() => {
@@ -52,41 +79,23 @@ function rotateScripture() {
     }, 500);
 }
 
-// ... existing initDashboard and scripture logic ...
-
-// LOGOUT LOGIC
+// 4. LOGOUT LOGIC
 const logoutTrigger = document.getElementById('logout-trigger');
 
-async function checkNotifications(studentId) {
-    const { count, error } = await client
-        .from('notifications')
-        .select('*', { count: 'exact', head: true })
-        .eq('student_id', studentId)
-        .eq('is_read', false);
-
-    if (!error && count > 0) {
-        document.getElementById('global-noti-dot').style.display = 'block';
-    }
-}
-
-// Update your existing initDashboard to call this:
-// ... after you get the profile ...
-// checkNotifications(user.id);
-
-
 if (logoutTrigger) {
-    logoutTrigger.addEventListener('click', async () => {
+    logoutTrigger.addEventListener('click', async (e) => {
+        e.preventDefault();
         const confirmLogout = confirm("Are you sure you want to log out?");
         if (confirmLogout) {
-            // Sign out from Supabase
             const { error } = await client.auth.signOut();
             if (error) {
                 console.error("Error logging out:", error.message);
             } else {
-                // Redirect to landing page
-                window.location.href = "index.html";
+                window.location.href = "login.html";
             }
         }
     });
 }
+
+// 5. BOOTSTRAP
 document.addEventListener('DOMContentLoaded', initDashboard);
