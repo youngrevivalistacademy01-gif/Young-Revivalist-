@@ -1,0 +1,94 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif; /* Use a modern sans-serif */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 40px;
+}
+
+.outline {
+    color: transparent;
+    -webkit-text-stroke: 1px #555;
+}
+
+.access-portal {
+    text-align: left;
+    border-top: 1px solid #222;
+    padding-top: 30px;
+}
+
+h2 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.7rem;
+    color: #444;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #333;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus {
+    border-bottom: 1px solid #fff;
+}
+
+button {
+    width: 100%;
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ccc;
+}
+
+#message {
+    font-size: 0.8rem;
+    margin-top: 15px;
+    text-align: center;
+}

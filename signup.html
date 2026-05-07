@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Academy | YRA</title>
+    <link rel="stylesheet" href="signup.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <p class="est">EST. 2026</p>
+            <h1>YOUNG<br>REVIVALIST<br><span class="outline">ACADEMY</span></h1>
+        </header>
+
+        <main class="access-portal">
+            <h2>BECOME A REVIVALIST</h2>
+            <p class="subtitle">Enter your details to join the cohort.</p>
+
+            <div class="input-group">
+                <label>FULL NAME</label>
+                <input type="text" id="fullname" placeholder="" required>
+            </div>
+
+            <div class="input-group">
+                <label>EMAIL ADDRESS</label>
+                <input type="email" id="email" placeholder="revivalist@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>SECRET KEY (PASSWORD)</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button id="signup-btn">JOIN THE ACADEMY</button>
+            <p id="message"></p>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Stream | YRA</title>
+    <link rel="stylesheet" href="notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="stream-wrapper">
+        <header class="stream-header">
+            <a href="dash.html" class="back-link"><i class="fas fa-chevron-left"></i></a>
+            <div class="header-text">
+                <h1>THE RHEMA STREAM</h1>
+                <p>notifications and updates</p>
+            </div>
+            <div class="status-dot-active"></div>
+        </header>
+
+        <main class="inbox-container" id="inbox-list">
+            <div class="loader-pulse">Syncing with Academy...</div>
+        </main>
+    </div>
+    <script src="notification.js"></script>
+</body>
+</html>
