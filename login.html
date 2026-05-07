@@ -2,95 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gateway | YRA</title>
-    <link rel="stylesheet" href="academy.css">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Access Portal | YRA</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="gateway">
+<body>
+    <div class="wrapper">
+        <header>
+            <p class="est">EST. 2026</p>
+            <h1>YOUNG<br>REVIVALIST<br><span class="outline">ACADEMY</span></h1>
+        </header>
 
-    <div class="vortex-overlay"></div>
+        <main class="login-card">
+            <h2>ACCESS PORTAL</h2>
+            <p class="tagline">Identify yourself, Revivalist.</p>
 
-    <main class="login-wrapper">
-        <div class="side-branding">
-            <h1 class="vertical-text">EST. <span>2026</span></h1>
-            <div class="main-title">
-                <span class="outline">YOUNG</span>
-                <span>REVIVALIST</span>
-                <span class="outline">ACADEMY</span>
+            <div class="input-container">
+                <label>EMAIL ADDRESS</label>
+                <input type="email" id="email-input" placeholder="revivalist@example.com">
             </div>
-        </div>
 
-        <div class="entry-portal">
-            <div class="portal-content">
-                <div class="portal-header">
-                    <h3>Access Portal</h3>
-                    <p>Identify yourself, Revivalist.</p>
-                </div>
-
-                <form id="portalForm">
-                    <div class="field">
-                        <input type="text" id="matric" required>
-                        <label>Matriculation Number</label>
-                        <div class="line"></div>
-                    </div>
-
-                    <div class="field">
-                        <input type="password" id="password" required>
-                        <label>Secret Key (Password)</label>
-                        <div class="line"></div>
-                    </div>
-
-                    <div class="portal-actions">
-                        <button type="submit" class="glow-btn">
-                            <span>ENTER THE ACADEMY</span>
-                            <div class="btn-flare"></div>
-                        </button>
-                    </div>
-                </form>
+            <div class="input-container">
+                <label>SECRET KEY (PASSWORD)</label>
+                <input type="password" id="password-input" placeholder="••••••••">
             </div>
-        </div>
-    </main>
-<script>
-    const form = document.getElementById('portalForm');
-    
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const btn = document.querySelector('.glow-btn');
-        const matricValue = document.getElementById('matric').value.trim();
-        
-        // Visual Feedback
-        btn.innerHTML = "VALIDATING...";
-        btn.style.letterSpacing = "10px";
 
-        setTimeout(() => {
-            // Creative Logic: Extract the number from the string (e.g., "025" from "YRA/025")
-            const parts = matricValue.split('/');
-            const prefix = parts[0]; // Should be YRA
-            const number = parseInt(parts[1], 10); // Converts "001" to 1, "300" to 300
-
-            // Check if prefix is correct AND number is in range 1-300
-            if (prefix === "YRA" && number >= 1 && number <= 300) {
-                // Success
-                btn.innerHTML = "IDENTITY VERIFIED";
-                btn.style.background = "#FF5F00";
-                document.body.style.transition = "2s";
-                document.body.style.backgroundColor = "white";
-                setTimeout(() => window.location.href = 'dashboard.html', 1000);
-            } else {
-                // Error Glitch Effect
-                btn.innerHTML = "ACCESS DENIED";
-                btn.style.background = "red";
-                document.body.style.animation = "glitch 0.2s 3";
-                
-                setTimeout(() => {
-                    btn.innerHTML = "ENTER THE ACADEMY";
-                    btn.style.background = "white";
-                    btn.style.letterSpacing = "2px";
-                }, 2000);
-            }
-        }, 1500);
-    });
-</script>
+            <button id="login-btn">ENTER THE ACADEMY</button>
+            <p id="error-msg"></p>
+            
+            <div class="admin-gate">
+                <a href="admin-login.html">ADMINISTRATOR ACCESS</a>
+            </div>
+        </main>
+    </div>
+    <script src="login.js"></script>
 </body>
 </html>
