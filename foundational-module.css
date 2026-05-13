@@ -1,0 +1,122 @@
+/* YRA Academy - White & Peach Cinematic Style */
+
+:root {
+    --primary-peach: #FFDAB9; 
+    --soft-white: #FFFDFB;
+    --deep-peach: #FF8C00; 
+    --text-dark: #333333;
+    --glass-effect: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(255, 218, 185, 0.4);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF5EE 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+.module-container {
+    padding: 60px 5%;
+}
+
+.dashboard-header {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.section-title span {
+    color: var(--deep-peach);
+}
+
+.subtitle {
+    color: #777;
+    font-size: 1.1rem;
+    margin-top: 8px;
+}
+
+/* Grid Layout */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Cinematic Cards */
+.module-card {
+    background: var(--glass-effect);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    padding: 30px;
+    border-radius: 18px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 140, 0, 0.12);
+    border-color: var(--deep-peach);
+}
+
+.module-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--primary-peach);
+    opacity: 0.4;
+    position: absolute;
+    top: -5px;
+    right: 15px;
+    z-index: 0;
+}
+
+.module-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.3rem;
+    z-index: 1;
+}
+
+.module-card p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+/* Peach Button */
+.enter-btn {
+    text-decoration: none;
+    text-align: center;
+    padding: 12px;
+    background: var(--primary-peach);
+    color: var(--deep-peach);
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.enter-btn:hover {
+    background: var(--deep-peach);
+    color: #FFF;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title { font-size: 2rem; }
+    .module-grid { grid-template-columns: 1fr; }
+}
