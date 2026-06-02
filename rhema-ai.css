@@ -1,249 +1,112 @@
-/* 🛠️ INDUSTRIAL TECH VARIABLES */
+/* 🍦 GLASSMORPHISM SETUP */
 :root {
-    --bg-void: #060608;
-    --card-glass: rgba(14, 14, 18, 0.75);
-    --warn-orange: #ff6a00;       /* High-visibility Safety Orange */
-    --text-pure: #ffffff;
-    --text-ghost: rgba(255, 255, 255, 0.4);
-    --ff-heading: 'Syne', sans-serif;
-    --ff-display: 'Space Grotesk', sans-serif;
+    --text-dark: #1d1d1f;
+    --text-muted: #6e6e73;
+    --ff-sans: 'Inter', sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    background-color: var(--bg-void);
-    color: var(--text-pure);
-    font-family: var(--ff-display);
+    background-color: #f5f5f7;
+    color: var(--text-dark);
+    font-family: var(--ff-sans);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 🪐 SCENERY DESIGN CANVAS GRID */
-.construction-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    background-size: 50px 50px;
-    background-image: 
-        linear-gradient(to right, rgba(255, 106, 0, 0.015) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 106, 0, 0.015) 1px, transparent 1px);
-    mask-image: radial-gradient(circle at 50% 50%, black, transparent 85%);
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 85%);
-    pointer-events: none;
-}
-
-/* HAZARD STRIP BOUNDS */
-.hazard-strip-top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 4px;
-    z-index: 10;
-    background: repeating-linear-gradient(
-        -45deg,
-        var(--warn-orange),
-        var(--warn-orange) 10px,
-        #000000 10px,
-        #000000 20px
-    );
-}
-
-/* MAIN CENTERING DECK */
-.main-container {
     position: relative;
-    z-index: 5;
-    width: 100%;
-    max-width: 450px;
-    padding: 0 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
 }
 
-/* 🤖 KINETIC AI NODE ANIMATIONS */
-.ai-node-wrapper {
-    position: relative;
-    width: 90px;
-    height: 90px;
-    margin-bottom: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ai-core-box {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #111116, #1a1a24);
-    border: 1px solid rgba(255, 106, 0, 0.2);
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.2rem;
-    color: var(--warn-orange);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    z-index: 5;
-}
-
-.pulse-ring {
+/* 🎨 BACKGROUND GRADIENT BLOBS */
+.bg-blur-blob {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--warn-orange);
-    border-radius: 24px;
-    opacity: 0.4;
-    animation: layoutPulse 2.5s infinite cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 2;
-}
-
-.pulse-ring-outer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 1px dashed var(--warn-orange);
-    border-radius: 24px;
-    opacity: 0.2;
-    animation: layoutPulseOuter 3.5s infinite linear;
-    z-index: 1;
-}
-
-/* ⚠️ TYPOGRAPHY STRUCTURING */
-.announcement-block .status-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--warn-orange);
-    background: rgba(255, 106, 0, 0.08);
-    padding: 6px 14px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 106, 0, 0.15);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.announcement-block .live-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--warn-orange);
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
-    animation: blinker 1s infinite alternate;
+    filter: blur(80px);
+    z-index: 1;
+    opacity: 0.6;
 }
 
-.announcement-block h1 {
-    font-family: var(--ff-heading);
-    font-size: 2.5rem;
+.blob-1 {
+    background: #ffaa64; /* Soft warm orange */
+    top: 20%;
+    left: 25%;
+}
+
+.blob-2 {
+    background: #af85ff; /* Soft spiritual purple */
+    bottom: 20%;
+    right: 25%;
+}
+
+/* 🔮 THE GLASS CARD */
+.glass-card {
+    position: relative;
+    z-index: 5;
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.45); /* Glass White */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 28px;
+    padding: 40px 30px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+}
+
+/* ⚠️ CONSTRUCTION ANIMATION */
+.cone-wrapper {
+    font-size: 3.5rem;
+    color: #ff7b00; /* Clean construction orange */
+    margin-bottom: 24px;
+    display: inline-block;
+    animation: smoothTilt 2s ease-in-out infinite alternate;
+}
+
+.glass-card h1 {
+    font-size: 2rem;
     font-weight: 800;
-    line-height: 1.1;
     margin-bottom: 12px;
     letter-spacing: -0.5px;
 }
 
-.announcement-block h1 span {
-    color: transparent;
-    -webkit-text-stroke: 1px var(--text-pure);
-}
-
-.announcement-block .status-main {
+.glass-card .main-msg {
     font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-pure);
-    margin-bottom: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+
+.divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    width: 50%;
+    margin: 24px auto;
+}
+
+.glass-card .sub-msg {
+    font-size: 0.9rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
 }
 
-.announcement-block .status-sub {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--text-ghost);
-    margin-bottom: 35px;
-}
-
-/* 🛠️ INDUSTRIAL BUILD COMPILER INTERFACE CARD */
-.system-loader-card {
-    width: 100%;
-    background: var(--card-glass);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 16px;
-    padding: 16px 20px;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-}
-
-.loader-header, .loader-footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
-    color: var(--text-ghost);
-    font-weight: 500;
-}
-
-.progress-bar-track {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    margin: 12px 0;
-    overflow: hidden;
-}
-
-.progress-bar-fill {
-    width: 45%;
-    height: 100%;
-    background: var(--warn-orange);
-    border-radius: 10px;
-    box-shadow: 0 0 10px var(--warn-orange);
-    animation: dynamicLoading 4s infinite ease-in-out alternate;
-}
-
-/* 🔄 CORE PERFORMANCE HARDWARE ANIMATIONS */
-@keyframes layoutPulse {
-    0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(1.4); opacity: 0; }
-}
-
-@keyframes layoutPulseOuter {
-    0% { transform: rotate(0deg) scale(1); }
-    100% { transform: rotate(360deg) scale(1.6); opacity: 0; }
-}
-
-@keyframes blinker {
-    0% { opacity: 0.2; }
-    100% { opacity: 1; }
-}
-
-@keyframes dynamicLoading {
-    0% { width: 10%; transform: translateX(0%); }
-    50% { width: 60%; }
-    100% { width: 25%; transform: translateX(250%); }
-}
-
-.blink-rate {
-    animation: blinker 0.6s infinite alternate;
-    color: var(--warn-orange);
-}
-
-/* 🖥️ VIEWPORT ADAPTATIONS FOR DESKTOP SCREENS */
-@media (min-width: 768px) {
-    .main-container { max-width: 520px; }
-    .announcement-block h1 { font-size: 3.2rem; }
+/* 🔄 INTERACTIVE KEYFRAMES */
+@keyframes smoothTilt {
+    0% {
+        transform: rotate(-8deg) scale(1);
+    }
+    100% {
+        transform: rotate(8deg) scale(1.05);
+    }
 }
