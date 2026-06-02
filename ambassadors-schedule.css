@@ -1,0 +1,260 @@
+/* 🏷️ YRA BRAND PALETTE SYSTEM */
+:root {
+    --bg-pure: #ffffff;
+    --text-dark: #111111;         
+    --text-muted: #828287;        
+    --accent-terracotta: #e98a68; /* Core mobile UI theme key color */
+    --accent-soft-peach: rgba(233, 138, 104, 0.1);
+    --ff-sans: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #fcfbfc;
+    color: var(--text-dark);
+    font-family: var(--ff-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 🎨 GLASSMORPHISM DEPTH GLOW BLOCKS */
+.glass-bg-glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.22;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.glow-1 {
+    background: var(--accent-terracotta);
+    top: -40px;
+    right: -80px;
+}
+
+.glow-2 {
+    background: #ffb84d; /* Warm amber shift representing global alignment & harvest */
+    bottom: 20%;
+    left: -130px;
+}
+
+/* 📱 NATIVE APP VIEWPANEL INTERACTION OVERLAY */
+.app-container {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 480px; 
+    margin: 0 auto;
+    padding: 20px 20px 60px 20px;
+}
+
+/* NAVIGATION ARCHITECTURE SYSTEM BAR */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 4px 0;
+}
+
+.back-control {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.app-brand {
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.dot-online {
+    width: 6px;
+    height: 6px;
+    background-color: #34c759;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #34c759;
+}
+
+/* 🎯 DISPLAY TITLE HERO PACK */
+.cohort-hero {
+    margin-bottom: 35px;
+}
+
+.cohort-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    margin-bottom: 8px;
+}
+
+.pill-badge {
+    display: inline-block;
+    background: var(--accent-soft-peach);
+    color: var(--accent-terracotta);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+}
+
+.cohort-motto {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-terracotta);
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+}
+
+.cohort-aim {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+/* 🔮 LAYERED TRANSLUCENT CARDS CONFIGURATOR */
+.modules-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.glass-module-card {
+    background: rgba(255, 255, 255, 0.55); 
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 30px;
+    padding: 30px 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.mod-number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.topic-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-terracotta);
+}
+
+.mod-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+}
+
+/* METRIC CONTENT DECKING BLOCK SYSTEM */
+.focus-box, .outcome-box {
+    margin-bottom: 24px;
+}
+
+.focus-box h3, .outcome-box h3 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.focus-box ul {
+    list-style: none;
+}
+
+.focus-box ul li {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+}
+
+.focus-box ul li i {
+    font-size: 0.5rem;
+    color: var(--accent-terracotta);
+    margin-top: 6px;
+}
+
+.outcome-box p {
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-dark);
+    padding-left: 12px;
+    border-left: 2px solid var(--accent-terracotta);
+}
+
+/* THE PRIMARY MOBILE APP INTERACTION BAR BUTTON */
+.action-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--text-dark);
+    color: var(--bg-pure);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 18px 24px;
+    border-radius: 20px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.glass-module-card:active {
+    transform: scale(0.98);
+}
+
+.action-pill:active {
+    background-color: var(--accent-terracotta);
+}
