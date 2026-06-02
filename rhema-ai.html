@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rhema Intelligence | YRA</title>
+    <link rel="stylesheet" href="rhema-ai.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sanctuary-container">
+        <header class="rhema-header">
+            <a href="dashboard.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="ai-profile">
+                <div class="mini-robot">
+                    <div class="eyes"><span></span><span></span></div>
+                </div>
+                <div class="ai-info">
+                    <h1>Rhema Intelligence</h1>
+                    <div class="ai-status">
+                        <span class="status-pulse"></span>
+                        <span id="status-text">Ready to Assist</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="chat-area" id="chat-window">
+            <div class="message rhema-msg thinking" id="thinking-state" style="display: none;">
+                <div class="msg-content">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="interaction-footer">
+            <div class="suggestion-chips">
+                <div class="chip-scroll">
+                    <button class="chip" onclick="usePrompt('Foundational Cohort')">Foundational</button>
+                    <button class="chip" onclick="usePrompt('Identity Cohort')">Identity</button>
+                    <button class="chip" onclick="usePrompt('Maturity Cohort')">Maturity</button>
+                    <button class="chip" onclick="usePrompt('Ambassadors Cohort')">Ambassadors</button>
+                </div>
+            </div>
+
+            <div class="input-glass-bar">
+                <textarea id="student-input" placeholder="Message Rhema..." rows="1"></textarea>
+                <button id="send-btn" aria-label="Send Message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            
+            <p class="integrity-disclaimer">Guided by the Spirit & the Word</p>
+        </footer>
+    </div>
+
+    <script src="rhema-ai.js"></script>
+    <script src="manual.js"></script>
+</body>
+</html> 
