@@ -9,13 +9,17 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { background-color: var(--bg-color); color: var(--text-main); font-family: -apple-system, sans-serif; display: flex; justify-content: center; }
 
-.app-container { width: 100%; max-width: 430px; padding: 20px 20px 100px; }
+.app-container { width: 100%; max-width: 430px; padding: 20px 20px 100px; position: relative; }
 
 /* Header & Status */
-.main-header { display: flex; justify-content: space-between; padding: 10px 0 30px; }
+.main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 30px; }
 .logo { font-weight: 900; font-size: 22px; }
+.header-right { display: flex; align-items: center; gap: 15px; }
 .status-indicator { display: flex; align-items: center; font-size: 10px; font-weight: 700; color: var(--text-muted); }
 .status-dot { width: 7px; height: 7px; background: #28cd41; border-radius: 50%; margin-right: 6px; box-shadow: 0 0 8px #28cd41; }
+
+.noti-trigger { position: relative; font-size: 20px; color: #1d1d1f; text-decoration: none; }
+.noti-badge { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #ff3b30; border-radius: 50%; border: 2px solid #fff; }
 
 /* Welcome Text */
 .brand-text { font-size: 2.8rem; line-height: 0.9; letter-spacing: -2.5px; font-weight: 900; margin-bottom: 5px; }
@@ -26,6 +30,8 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 
 /* Icon Grid */
 .quick-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 35px; }
+.nav-card { cursor: pointer; transition: transform 0.2s ease; text-decoration: none; display: block; color: inherit; }
+.nav-card:active { transform: scale(0.95); }
 .icon-box { background: #fff; aspect-ratio: 1; border-radius: 22px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 8px; font-size: 22px; position: relative; }
 .nav-card label { font-size: 8px; font-weight: 800; text-align: center; display: block; color: #555; }
 .noti-dot { position: absolute; top: 0; right: 0; width: 10px; height: 10px; background: var(--accent-red); border-radius: 50%; border: 2px solid #fff; }
@@ -41,63 +47,103 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 #scripture-ref { font-size: 10px; font-weight: 800; text-transform: uppercase; opacity: 0.8; }
 
 /* Focus Section */
-.focus-tabs { background: #f2f2f7; border-radius: 20px; padding: 4px; display: flex; margin-bottom: 20px; }
-.focus-btn { flex: 1; background: none; border: none; padding: 10px 0; font-size: 11px; font-weight: 700; color: #8e8e93; }
-.focus-btn.active { background: #fff; border-radius: 16px; color: #000; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
 .module-content { background: #fff; padding: 25px; border-radius: 25px; border: 1px solid #f2f2f7; text-align: center; }
+#cohort-display { font-size: 11px; font-weight: 800; color: #8e8e93; margin-bottom: 5px; }
+#focus-module-name { font-weight: 700; font-size: 14px; }
 progress { width: 100%; height: 6px; appearance: none; border-radius: 10px; overflow: hidden; margin-top: 15px; }
 progress::-webkit-progress-bar { background: #f2f2f7; }
 progress::-webkit-progress-value { background: var(--brand-orange); }
 
 /* Bottom Nav */
-.bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 430px; background: #fff; height: 80px; display: flex; justify-content: space-around; padding-top: 15px; border-top: 1px solid #f2f2f7; }
-.nav-item { color: #c7c7cc; font-size: 20px; }
+.bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 430px; background: #fff; height: 80px; display: flex; justify-content: space-around; padding-top: 15px; border-top: 1px solid #f2f2f7; z-index: 99; }
+.bottom-nav a { text-decoration: none; color: inherit; }
+.nav-item { color: #c7c7cc; font-size: 20px; cursor: pointer; }
 .nav-item.active { color: var(--brand-orange); }
 
-
-.quick-nav a, .bottom-nav a {
+/* --- RHEMA AI ROBOT SYSTEM --- */
+.rhema-ai-container {
+    position: fixed;
+    bottom: 95px; /* Above bottom nav */
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 100;
     text-decoration: none;
-    color: inherit; /* Keeps your original icon and text colors */
-    display: block;
 }
 
-.nav-card {
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.rhema-msg-bubble {
+    background: #1c1c1e;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 16px 16px 2px 16px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+    max-width: 140px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+    animation: floatAnim 3s infinite ease-in-out;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.nav-card:active {
-    transform: scale(0.95); /* Adds a "pressed" feel on mobile */
-}
-
-
-
-.main-header {
+.rhema-robot-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--brand-orange);
+    border-radius: 14px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.noti-trigger {
+    box-shadow: 0 10px 20px rgba(255, 107, 61, 0.3);
     position: relative;
-    font-size: 20px;
-    color: #1d1d1f;
-    text-decoration: none;
 }
 
-.noti-badge {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 8px;
-    height: 8px;
-    background: #ff3b30;
+.robot-head {
+    width: 24px;
+    height: 18px;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+}
+
+.robot-eyes {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 6px;
+}
+
+.robot-eyes span {
+    width: 5px;
+    height: 5px;
+    background: var(--brand-orange);
     border-radius: 50%;
-    border: 2px solid #fff;
+    animation: blink 4s infinite;
+}
+
+.robot-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--brand-orange);
+    border-radius: 14px;
+    opacity: 0.4;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+@keyframes floatAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+/* Mobile Adjustment */
+@media (max-width: 430px) {
+    .rhema-ai-container { right: 15px; }
+    .rhema-msg-bubble { max-width: 120px; font-size: 9px; }
 }
