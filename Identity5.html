@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YRA | Module 5</title>
+    <!-- Premium Inter Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icon Vectors -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="module-style.css">
+</head>
+<body>
+
+    <!-- Ambient background atmosphere -->
+    <div class="module-bg-glow glow-top"></div>
+    <div class="module-bg-glow glow-bottom"></div>
+
+    <!-- 📱 APP FRAME WRAPPER -->
+    <div class="app-container">
+        
+        <!-- TOP NAVIGATION HEADER -->
+        <header class="app-header">
+            <a href="identity-schedule.html" class="back-control">
+                <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <div class="app-brand">YRA</div>
+            <div class="cohort-badge">IDENTITY</div>
+        </header>
+
+        <!-- CORE TEXT CONTENT PACK -->
+        <main class="module-content-card">
+            <span class="module-index">MODULE 05</span>
+            <h1 class="module-title">Living by Faith and the Word</h1>
+            
+            <!-- 🎧 PREMIUM AUDIO PLAYER CORE -->
+            <section class="audio-player-wrapper">
+                <div class="player-header">
+                    <div class="player-wave-icon">
+                        <i class="fa-solid fa-waveform-lines"></i>
+                    </div>
+                    <div class="audio-meta">
+                        <h3>Listen to Lecture</h3>
+                        <p id="audio-status">Tap to stream audio track</p>
+                    </div>
+                </div>
+
+                <!-- Hidden Native Audio Node Element -->
+                <audio id="main-audio-node" src="audio/identity2.mp3" preload="metadata"></audio>
+
+                <!-- Custom Progress Timeline Tracking Slider Bar -->
+                <div class="timeline-container">
+                    <div class="progress-bar-rail" id="progress-rail">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="time-metrics-row">
+                        <span id="current-time">0:00</span>
+                        <span id="duration-time">0:00</span>
+                    </div>
+                </div>
+
+                <!-- Player Interactive Control Buttons Group -->
+                <div class="player-controls-row">
+                    <button class="control-btn skip-back" id="btn-skip-back" title="Rewind 10s">
+                        <i class="fa-solid fa-backward-10"></i>
+                    </button>
+                    
+                    <button class="control-btn play-pause-master" id="btn-master-toggle" title="Play">
+                        <i class="fa-solid fa-play" id="play-icon-glyph"></i>
+                    </button>
+                    
+                    <button class="control-btn skip-forward" id="btn-skip-forward" title="Fast Forward 10s">
+                        <i class="fa-solid fa-forward-10"></i>
+                    </button>
+                </div>
+            </section>
+
+            <hr class="card-divider">
+
+            <!-- 📝 WRITTEN ANALYSIS & ICONIC SYMBOLS OVERVIEW -->
+            <section class="module-overview-narrative">
+                <h2>MODULE OVERVIEW</h2>
+                
+                <div class="narrative-paragraph">
+                    <span class="symbol-marker"><i class="fa-solid fa-book-open"></i></span>
+                    <p>
+                        The structural engine of transformation is scripture. Recognizing <strong>the value of Scripture</strong> means moving past casual reading into intentionally <strong>studying and understanding the Word</strong>. It is the absolute foundation for truth and divine instruction.
+                    </p>
+                </div>
+
+                <div class="narrative-paragraph">
+                    <span class="symbol-marker"><i class="fa-solid fa-bolt-lightning"></i></span>
+                    <p>
+                        The revelation you gather must be activated. Discipleship requires treating <strong>faith as a lifestyle</strong>, which means consistently <strong>acting upon God's Word</strong> even when circumstances voice contradiction. Faith is interactive; it acts.
+                    </p>
+                </div>
+
+                <div class="narrative-paragraph">
+                    <span class="symbol-marker"><i class="fa-solid fa-brain"></i></span>
+                    <p>
+                        To remain steady, your operating system must change. By deliberately <strong>renewing the mind</strong>, you discard old, default assumptions and build a resilient, unshakeable <strong>Biblical worldview</strong> that evaluates everything through a divine lens.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 📤 ASSIGNMENT SUBMISSION LINK -->
+            <a href="assignment.html" class="assignment-submission-pill">
+                <div class="pill-left">
+                    <i class="fa-solid fa-file-pen"></i>
+                    <span>Submit Module Assignment</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+
+        </main>
+    </div>
+
+    <!-- AUDIO PLAYER ENGINE LOGIC SCRIPT -->
+    <script>
+        const audio = document.getElementById('main-audio-node');
+        const playToggleBtn = document.getElementById('btn-master-toggle');
+        const playIconGlyph = document.getElementById('play-icon-glyph');
+        const audioStatusText = document.getElementById('audio-status');
+        const progressRail = document.getElementById('progress-rail');
+        const progressFill = document.getElementById('progress-fill');
+        const currentTimeDisplay = document.getElementById('current-time');
+        const durationTimeDisplay = document.getElementById('duration-time');
+
+        playToggleBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIconGlyph.className = "fa-solid fa-pause";
+                audioStatusText.innerText = "Playing Identity Lecture...";
+                audioStatusText.classList.add('playing');
+            } else {
+                audio.pause();
+                playIconGlyph.className = "fa-solid fa-play";
+                audioStatusText.innerText = "Playback Paused";
+                audioStatusText.classList.remove('playing');
+            }
+        });
+
+        audio.addEventListener('loadedmetadata', () => { durationTimeDisplay.innerText = formatTime(audio.duration); });
+        audio.addEventListener('timeupdate', () => {
+            const current = audio.currentTime;
+            const total = audio.duration || 0;
+            progressFill.style.width = `${(current / total) * 100}%`;
+            currentTimeDisplay.innerText = formatTime(current);
+        });
+
+        progressRail.addEventListener('click', (e) => {
+            audio.currentTime = (e.offsetX / progressRail.offsetWidth) * audio.duration;
+        });
+
+        document.getElementById('btn-skip-back').addEventListener('click', () => { audio.currentTime -= 10; });
+        document.getElementById('btn-skip-forward').addEventListener('click', () => { audio.currentTime += 10; });
+
+        audio.addEventListener('ended', () => {
+            playIconGlyph.className = "fa-solid fa-play";
+            audioStatusText.innerText = "Lecture Completed";
+            progressFill.style.width = "0%";
+            currentTimeDisplay.innerText = "0:00";
+        });
+
+        function formatTime(seconds) {
+            let minutes = Math.floor(seconds / 60);
+            let remSeconds = Math.floor(seconds % 60);
+            if (remSeconds < 10) remSeconds = `0${remSeconds}`;
+            return `${minutes}:${remSeconds}`;
+        }
+    </script>
+</body>
+</html>
