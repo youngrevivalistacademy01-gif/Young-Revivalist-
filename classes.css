@@ -1,0 +1,316 @@
+/* 🏷️ YRA SYSTEM BRAND GUIDELINES */
+:root {
+    --bg-surface: #f9f9fa;       /* Light system backdrop canvas */
+    --card-white: #ffffff;       /* Pure white structural card face */
+    --text-primary: #111111;     /* High-weight header title black */
+    --text-muted: #96969a;       /* Clean ash grey labeling weight */
+    --accent-orange: #e98a68;    /* Signature terracotta orange highlight tint */
+    --accent-orange-soft: rgba(233, 138, 104, 0.1);
+    --icon-locked-bg: #f0f0f2;   /* Muted icon bounding boxes from image_3 */
+    --font-system: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    font-family: var(--font-system);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 🔮 LAYERED DEPTH SHADOW BLOB LAYERS */
+.vault-bg-glow {
+    position: fixed;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+    z-index: 1;
+    pointer-events: none;
+}
+.glow-top { background: var(--accent-orange); top: -40px; right: -60px; }
+.glow-bottom { background: #9b72ff; bottom: -5px; left: -100px; }
+
+/* 📱 NATIVE WRAPPER SCALING FRAME */
+.app-container {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 480px; 
+    margin: 0 auto;
+    padding: 44px 24px 60px 24px;
+}
+
+/* 🎯 TITLES AND METRICS HEADERS */
+.header {
+    margin-bottom: 32px;
+    padding-left: 4px;
+}
+
+.sub-label {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    letter-spacing: -0.1px;
+}
+
+.main-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.8px;
+}
+
+/* CARDS WRAPPER GRID */
+.class-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 💎 THE NATIVE CLASS CARDS STRUCTURE MATCHING image_3.png */
+.class-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-white);
+    border-radius: 24px;
+    padding: 20px;
+    text-decoration: none;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015);
+    transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.005);
+}
+
+/* ICON EMBED MATRIX BOXES */
+.class-card .icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 16px;
+    transition: background-color 0.2s ease;
+}
+
+/* VERIFIED COLOR STATES MATCHING image_3.png SCREEN */
+.class-card.unlocked .icon-box {
+    background-color: var(--accent-orange-soft);
+    color: var(--accent-orange);
+}
+
+.class-card.locked .icon-box {
+    background-color: var(--icon-locked-bg);
+    color: var(--text-muted);
+}
+
+/* CENTER CARDS CONTENT METRICS */
+.class-info h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+}
+
+/* RIGHT HAND SIDE CARD HOOKS */
+.lock-status {
+    margin-left: auto;
+    font-size: 0.9rem;
+    color: #cccccc; /* Perfect subtle padlocks color line */
+    padding-right: 4px;
+}
+
+.class-card.unlocked .lock-status {
+    color: rgba(0, 0, 0, 0.1);
+}
+
+/* 📑 THE PREMIUM HIGH-CONTRAST YRA PDF BAR */
+.pdf-download-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--text-primary); /* Bold pitch black system focus accent */
+    border-radius: 24px;
+    padding: 20px;
+    margin-top: 12px;
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.pdf-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.pdf-icon-circle {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-orange);
+    font-size: 1.1rem;
+}
+
+.pdf-text-pack span {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.pdf-text-pack h4 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--card-white);
+}
+
+.pdf-action-arrow {
+    color: var(--card-white);
+    font-size: 1rem;
+    padding-right: 4px;
+}
+
+/* ACTIVE PRESSED STATE SIMULATIONS FOR TOUCH DEVICES */
+.class-card:active, .pdf-download-bar:active {
+    transform: scale(0.97);
+}
+.pdf-download-bar:active {
+    background-color: #222225;
+}
+
+/* 🔐 iOS SHEET ARCHITECTURE PASSKEY MODAL SYSTEM */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: flex-end; /* Native bottom drawer execution */
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--card-white);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 32px 32px 0 0; /* Premium rounded app tray sheet */
+    padding: 20px 24px 44px 24px;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    text-align: center;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-handle {
+    width: 36px;
+    height: 5px;
+    background-color: #e0e0e5;
+    border-radius: 10px;
+    margin: 0 auto 24px auto;
+}
+
+.modal-content h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.modal-hint {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+/* NATIVE LOOK PASSKEY DIAL FIELD */
+#keyField {
+    width: 100%;
+    background-color: #f4f4f6;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    outline: none;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 6px;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    transition: border-color 0.2s ease;
+}
+
+.btn-verify {
+    width: 100%;
+    background-color: var(--text-primary);
+    color: var(--card-white);
+    border: none;
+    outline: none;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-verify:active {
+    background-color: var(--accent-orange);
+}
+
+#errorNote {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #ff5454;
+    font-size: 0.8rem;
+    margin-top: 16px;
+    font-weight: 700;
+}
+
+/* REJECTION FEEDBACK ANIMATION METER */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+.shake-anim { animation: shake 0.35s ease-in-out; }
