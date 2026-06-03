@@ -1,0 +1,316 @@
+/* 🏷️ YRA BRAND PALETTE SYSTEM */
+:root {
+    --bg-canvas: #fcfbfc;
+    --card-white: #ffffff;
+    --text-dark: #111111;
+    --text-muted: #828287;
+    --accent-terracotta: #e98a68; /* Exact UI profile key color from app screen */
+    --accent-soft-peach: rgba(233, 138, 104, 0.1);
+    --ff-sans: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-canvas);
+    color: var(--text-dark);
+    font-family: var(--ff-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 🎨 GLASSMORPHISM DESIGN BLURS */
+.module-bg-glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.15;
+    z-index: 1;
+    pointer-events: none;
+}
+.glow-top { background: var(--accent-terracotta); top: -50px; right: -80px; }
+.glow-bottom { background: #a37dfa; bottom: -5px; left: -120px; }
+
+/* 📱 NATIVE PHONE VIEWPORT FRAME LIMITER */
+.app-container {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 480px; 
+    margin: 0 auto;
+    padding: 20px 20px 60px 20px;
+}
+
+/* APPLICATION MANAGEMENT HEADER BAR */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 4px 0;
+}
+
+.back-control {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.app-brand {
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
+}
+
+.cohort-badge {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--accent-terracotta);
+    letter-spacing: 1px;
+    background: var(--accent-soft-peach);
+    padding: 6px 14px;
+    border-radius: 10px;
+}
+
+/* 🔮 CENTRAL CORE TRANSLUCENT MODULE CONTAINER */
+.module-content-card {
+    background: rgba(255, 255, 255, 0.65); 
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    padding: 32px 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.02);
+}
+
+.module-index {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.module-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.6px;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+}
+
+.card-divider {
+    border: none;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.06);
+    margin: 28px 0;
+}
+
+/* 🎧 THE MINIMAL CUSTOM STREAM AUDIO PLAYER PLAYER */
+.audio-player-wrapper {
+    background-color: var(--text-dark);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.player-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.player-wave-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-terracotta);
+    font-size: 1.2rem;
+}
+
+.audio-meta h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--card-white);
+}
+
+.audio-meta p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.audio-meta p.playing {
+    color: var(--accent-terracotta);
+    font-weight: 600;
+}
+
+/* 📊 PROGRESS TIMELINE CONTAINER RAIL */
+.timeline-container {
+    margin-bottom: 24px;
+}
+
+.progress-bar-rail {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--accent-terracotta);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+}
+
+.time-metrics-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* 🎛️ CONTROLLER MATRIX ROW MODULE */
+.player-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:active { transform: scale(0.9); }
+.control-btn:hover, .control-btn:active { color: var(--card-white); }
+
+.play-pause-master {
+    width: 56px;
+    height: 56px;
+    background-color: var(--card-white);
+    color: var(--text-dark);
+    border-radius: 50%;
+    font-size: 1.35rem;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.play-pause-master:hover, .play-pause-master:active {
+    background-color: var(--accent-terracotta);
+    color: var(--card-white);
+}
+
+/* 📝 DESCRIPTIVE NARRATIVE SYSTEM AREA */
+.module-overview-narrative h2 {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.narrative-paragraph {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.symbol-marker {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-terracotta);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.narrative-paragraph p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(17, 17, 17, 0.8);
+}
+
+.narrative-paragraph p strong {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+/* 📤 ASSIGNMENT SUBMISSION BUTTON BUTTON */
+.assignment-submission-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--text-dark);
+    color: var(--card-white);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 18px 24px;
+    border-radius: 20px;
+    margin-top: 16px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.assignment-submission-pill .pill-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.assignment-submission-pill .pill-left i {
+    color: var(--accent-terracotta);
+    font-size: 1.05rem;
+}
+
+.assignment-submission-pill:active {
+    transform: scale(0.97);
+    background-color: var(--accent-terracotta);
+}
