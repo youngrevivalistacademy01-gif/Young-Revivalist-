@@ -2,68 +2,203 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment Hub | YRA Academy</title>
-    <link rel="stylesheet" href="assignment-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YRA | Assignment Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assignment-dashboard.css">
 </head>
-<body class="dashboard-body">
+<body>
 
-    <header class="dashboard-header">
-        <div class="header-content">
-            <a href="dashboard.html" class="nav-brand">Y<span>R</span>A</a>
-            <div class="user-badge">
-                <i class="fa-solid fa-graduation-cap"></i> Student Portal
+    <div class="hub-container">
+        <header class="hub-header">
+            <a href="dashboard.html" class="back-control" aria-label="Return to main dashboard">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="header-info">
+                <h1>Assignment Hub</h1>
+                <p>Direct Access Curriculum Ledger</p>
             </div>
-        </div>
-    </header>
-
-    <main class="hub-container">
-        <header class="hub-intro">
-            <span class="badge">Curriculum</span>
-            <h1>Assignment Hub</h1>
-            <p>Assignment Portal.</p>
         </header>
 
-        <div class="track-grid">
-            <a href="assignment.html" class="track-card">
-                <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
-                <div class="card-info">
-                    <h3>Foundational Class</h3>
-                    <p>Foundational Class Assignment Portal.</p>
+        <section class="filter-wrapper">
+            <div class="filter-scroll">
+                <button class="filter-chip active" onclick="filterCohort('all')">All Modules</button>
+                <button class="filter-chip" onclick="filterCohort('foundational')">Foundational</button>
+                <button class="filter-chip" onclick="filterCohort('identity')">Identity</button>
+                <button class="filter-chip" onclick="filterCohort('maturity')">Maturity</button>
+                <button class="filter-chip" onclick="filterCohort('ambassadors')">Ambassadors</button>
+            </div>
+        </section>
+
+        <main class="cards-grid" id="modules-ledger-grid">
+            
+            <a href="assignment.html?id=1" class="module-card" data-track="foundational">
+                <div class="card-meta">
+                    <span class="track-badge foundational">Foundational</span>
+                    <span class="mod-index">M01</span>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <h3 class="mod-title">The True Gospel of Jesus Christ</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
             </a>
 
-            <a href="id-assignment.html" class="track-card">
-                <div class="card-icon"><i class="fa-solid fa-fingerprint"></i></div>
-                <div class="card-info">
-                    <h3>Identity Class</h3>
-                    <p>Identity Class Assignment Portal.</p>
+            <a href="assignment.html?id=2" class="module-card" data-track="foundational">
+                <div class="card-meta">
+                    <span class="track-badge foundational">Foundational</span>
+                    <span class="mod-index">M02</span>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <h3 class="mod-title">The Finished Work & Salvation Realities</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
             </a>
 
-            <a href="ma-assignment.html" class="track-card">
-                <div class="card-icon"><i class="fa-solid fa-mountain-sun"></i></div>
-                <div class="card-info">
-                    <h3>Maturity Class</h3>
-                    <p>Maturity Class Assignment Portal</p>
+            <a href="assignment.html?id=3" class="module-card" data-track="foundational">
+                <div class="card-meta">
+                    <span class="track-badge foundational">Foundational</span>
+                    <span class="mod-index">M03</span>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <h3 class="mod-title">The Reality of Grace, Faith & New Birth</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
             </a>
 
-            <a href="am-assignment.html" class="track-card">
-                <div class="card-icon"><i class="fa-solid fa-earth-africa"></i></div>
-                <div class="card-info">
-                    <h3>Ambassador Class</h3>
-                    <p>Ambassadors Class Assignment Portal.</p>
+            <a href="assignment.html?id=4" class="module-card" data-track="identity">
+                <div class="card-meta">
+                    <span class="track-badge identity">Identity</span>
+                    <span class="mod-index">M04</span>
                 </div>
-                <i class="fa-solid fa-chevron-right arrow"></i>
+                <h3 class="mod-title">Identity in Christ and Sonship</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
             </a>
-        </div>
-    </main>
 
+            <a href="assignment.html?id=5" class="module-card" data-track="identity">
+                <div class="card-meta">
+                    <span class="track-badge identity">Identity</span>
+                    <span class="mod-index">M05</span>
+                </div>
+                <h3 class="mod-title">Kingdom Authority & Dominion Mandate</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="assignment.html?id=6" class="module-card" data-track="maturity">
+                <div class="card-meta">
+                    <span class="track-badge maturity">Maturity</span>
+                    <span class="mod-index">M06</span>
+                </div>
+                <h3 class="mod-title">Walking in Love: Proof of Discipleship</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="assignment.html?id=7" class="module-card" data-track="maturity">
+                <div class="card-meta">
+                    <span class="track-badge maturity">Maturity</span>
+                    <span class="mod-index">M07</span>
+                </div>
+                <h3 class="mod-title">Death to Self & Inner Transformation</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="assignment.html?id=8" class="module-card" data-track="maturity">
+                <div class="card-meta">
+                    <span class="track-badge maturity">Maturity</span>
+                    <span class="mod-index">M08</span>
+                </div>
+                <h3 class="mod-title">Responsibility, Stewardship & Character</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="assignment.html?id=9" class="module-card" data-track="ambassadors">
+                <div class="card-meta">
+                    <span class="track-badge ambassadors">Ambassadors</span>
+                    <span class="mod-index">M09</span>
+                </div>
+                <h3 class="mod-title">Kingdom Community & Mentorship</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="assignment.html?id=10" class="module-card" data-track="ambassadors">
+                <div class="card-meta">
+                    <span class="track-badge ambassadors">Ambassadors</span>
+                    <span class="mod-index">M10</span>
+                </div>
+                <h3 class="mod-title">Discipleship, Evangelism & Mission</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="assignment.html?id=11" class="module-card" data-track="ambassadors">
+                <div class="card-meta">
+                    <span class="track-badge ambassadors">Ambassadors</span>
+                    <span class="mod-index">M11</span>
+                </div>
+                <h3 class="mod-title">Kingdom Leadership & Ambassadorship</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="assignment.html?id=12" class="module-card" data-track="ambassadors">
+                <div class="card-meta">
+                    <span class="track-badge ambassadors">Ambassadors</span>
+                    <span class="mod-index">M12</span>
+                </div>
+                <h3 class="mod-title">Productivity, Excellence & Transformation</h3>
+                <div class="card-action-footer">
+                    <span>Launch Portal</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+        </main>
+    </div>
+
+    <script>
+        function filterCohort(trackKey) {
+            // Update chip active token states
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Toggle grid systems visibility thresholds
+            document.querySelectorAll('.module-card').forEach(card => {
+                if (trackKey === 'all' || card.getAttribute('data-track') === trackKey) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
