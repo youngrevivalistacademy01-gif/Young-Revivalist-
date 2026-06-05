@@ -3,97 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Assignment Portal | YRA</title>
-    <link rel="stylesheet" href="rules.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+    <title>YRA | Portal Assignment Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assignment.css">
 </head>
-<body class="sanctuary-theme">
+<body>
 
-    <div class="aurora-bg"></div>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="javascript:history.back()" class="back-control" aria-label="Navigate back">
+                <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <div class="app-brand">ASSIGNMENT PORTAL</div>
+        </header>
 
-    <div class="sanctuary-wrapper">
-        <nav class="floating-nav">
-            <div class="nav-brand">Y<span>R</span>A</div>
-            <div class="nav-links">
-                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-house-chimney-window"></i></a>
-                <a href="schedule.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i></a>
-            </div>
-            <div class="nav-id">001</div>
-        </nav>
+        <main class="portal-card">
+            <span class="module-tag" id="target-index">Loading Track...</span>
+            <h1 class="module-title" id="target-title">Processing Curriculum Context...</h1>
 
-        <main class="sanctuary-main">
-            <header class="sanctuary-header">
-                <div class="welcome-text">
-                    <p class="pre-title">Faculty Submission</p>
-                    <h1>Journal & <span>Assignment</span></h1>
+            <section class="matric-workspace-block">
+                <label class="matric-label" for="matric-digits">Student Matric Number</label>
+                <div class="matric-input-composite-group">
+                    <div class="matric-prefix-lock">YRA /</div>
+                    <input 
+                        type="text" 
+                        id="matric-digits" 
+                        class="matric-editable-field" 
+                        placeholder="e.g. 11" 
+                        required
+                        pattern="[0-9]+"
+                        inputmode="numeric"
+                    >
                 </div>
-            </header>
+            </section>
 
-            <div class="form-container">
-                
-                <section class="form-card">
-                    <h3><i class="fa-solid fa-paper-plane"></i> Direct Submission</h3>
-                    
-                    <form action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST" class="submission-form">
-                        
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_subject" value="New Academy Assignment Submission!">
-
-                        <div class="input-row">
-                            <div class="input-field">
-                                <label>Full Name</label>
-                                <input type="text" name="Student Name" placeholder="Your Name" required>
-                            </div>
-                            <div class="input-field">
-                                <label>Matric Number</label>
-                                <input type="text" name="Matric Number" placeholder="YRA/2025/..." required>
-                            </div>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Module Reviewing</label>
-                            <select name="Module">
-                                <option>Module 1-3: The Gospel </option>
-                                <option>Module 4-6: The Secret Place & The Holy Spirit</option>
-                                <option>Module 7-8: Renewing The Mind & Understanding Purpose</option>
-                                <option>Module 9-10: Spirit Controlled Temperament & Agape</option>
-                                <option>Module 11: Saving Faith</option>
-                                <option>Module 12: The Blessings Of Abraham</option>
-                                <option>Module 13: The Identity of God 1&2</option>
-                                <option>Module 14: The Identity of a Believer</option>
-                                <option>Module 15: The Person of Jesus</option>
-                                <option>Module 16: Developing Intimacy with the Father</option>
-                                <option>Module 17: Understanding Righteousness</option>
-                                <option>Module 18: The Kingdom Culture</option>
-                                <option>Module 19: The Authority of a Believer</option>
-                                <option>Module 20: Faith Banquet</option>
-                                <option>Module 21: Understanding Deliverance</option>
-
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Review & Assignment Content</label>
-                            <textarea name="Message" rows="8" placeholder="Write your review or paste your assignment here..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-action-btn">Submit to Faculty</button>
-                    </form>
-                </section>
-
-                <section class="status-card">
-                    <h3><i class="fa-solid fa-circle-check"></i> Portal Status</h3>
-                    <p><small>Sending to: <strong>YRA Faculty</strong></small></p>
-                    <div class="status-line"></div>
-                    <ul class="info-list">
-                        <li><i class="fa-solid fa-bolt"></i> Instant Delivery</li>
-                        <li><i class="fa-solid fa-shield-halved"></i> Secure Submission</li>
-                    </ul>
-                </section>
-                
+            <div class="instructions-box">
+                <h3>Instructions</h3>
+                <p>Provide thoughtful, clear, and comprehensive answers based directly on the lecture modules and structural growth studies.</p>
             </div>
+
+            <form id="assignment-form">
+                <div id="dynamic-questions-container"></div>
+
+                <button type="submit" class="submission-btn">
+                    <i class="fa-brand fa-whatsapp"></i>
+                    <span>Submit</span>
+                </button>
+            </form>
         </main>
     </div>
 
