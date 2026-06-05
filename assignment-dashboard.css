@@ -1,0 +1,147 @@
+/* 🏷️ MASTER HUD SPECIFIC BRAND TOKENS */
+:root {
+    --orange: #e98a68;
+    --text-dark: #111111;
+    --text-muted: #66666a;
+    --bg-canvas: #f4f4f6;
+    --glass-white: rgba(255, 255, 255, 0.85);
+    --border-subtle: rgba(0, 0, 0, 0.05);
+    
+    /* Cohort Identity Codes */
+    --fnd-color: #4a90e2;
+    --id-color: #9b51e0;
+    --mat-color: #e98a68;
+    --amb-color: #2196f3;
+}
+
+* { 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+body {
+    margin: 0; padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-canvas);
+    min-height: 100vh;
+    display: flex; justify-content: center;
+}
+
+.hub-container {
+    width: 100%; max-width: 480px;
+    background: var(--glass-white);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    border-left: 1px solid rgba(0,0,0,0.03);
+    border-right: 1px solid rgba(0,0,0,0.03);
+}
+
+/* TOP DASHBOARD CONTROL HEAD */
+.hub-header {
+    padding: 24px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.back-control {
+    color: var(--text-dark);
+    font-size: 1.2rem;
+    text-decoration: none;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+.back-control:active { background-color: rgba(0,0,0,0.05); }
+
+.header-info h1 {
+    margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px;
+}
+.header-info p {
+    margin: 4px 0 0 0; font-size: 0.82rem; font-weight: 500; color: var(--text-muted);
+}
+
+/* HORIZONTAL CHIP SCROLL BAR CONTAINER */
+.filter-wrapper {
+    padding: 14px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-subtle);
+    position: sticky; top: 0; z-index: 20;
+}
+.filter-scroll {
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+}
+.filter-scroll::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+    background: #f4f4f6;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem; font-weight: 700;
+    cursor: pointer; white-space: nowrap;
+    transition: all 0.2s ease;
+}
+.filter-chip.active {
+    background: var(--text-dark);
+    color: #ffffff;
+}
+
+/* CARDS RESPONSIVE DISPLAY LAYOUT HOUSING GRID */
+.cards-grid {
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 14px;
+    overflow-y: auto; flex: 1;
+}
+
+.module-card {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 16px;
+    text-decoration: none;
+    display: flex; flex-direction: column;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+}
+.module-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.card-meta {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+}
+.track-badge {
+    font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 4px 10px; border-radius: 6px;
+}
+/* Cohort Pill Custom Aesthetics */
+.track-badge.foundational { background: rgba(74,144,226,0.1); color: var(--fnd-color); }
+.track-badge.identity { background: rgba(155,81,224,0.1); color: var(--id-color); }
+.track-badge.maturity { background: rgba(233,138,104,0.1); color: var(--mat-color); }
+.track-badge.ambassadors { background: rgba(33,150,243,0.1); color: var(--amb-color); }
+
+.mod-index {
+    font-size: 0.75rem; font-weight: 800; color: var(--text-muted); background: #f4f4f6;
+    padding: 2px 6px; border-radius: 4px;
+}
+
+.mod-title {
+    margin: 0 0 16px 0; font-size: 1.05rem; font-weight: 700; color: var(--text-dark);
+    line-height: 1.35; letter-spacing: -0.2px;
+}
+
+.card-action-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px dashed var(--border-subtle); padding-top: 12px;
+    font-size: 0.8rem; font-weight: 700; color: var(--orange);
+}
+.card-action-footer i { font-size: 0.75rem; transition: transform 0.2s; }
+.module-card:hover .card-action-footer i { transform: translateX(3px); }
